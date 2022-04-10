@@ -57,6 +57,14 @@
             this.chkSound = new System.Windows.Forms.CheckBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
             this.prgGeneration = new System.Windows.Forms.ProgressBar();
+            this.lblWaveHeightPerStep = new System.Windows.Forms.Label();
+            this.nudWaveHeightPerStep = new System.Windows.Forms.NumericUpDown();
+            this.lblNumSteps = new System.Windows.Forms.Label();
+            this.nudNumSteps = new System.Windows.Forms.NumericUpDown();
+            this.lblTotalWaveAmplitude = new System.Windows.Forms.Label();
+            this.txtTotalAmplitude = new System.Windows.Forms.TextBox();
+            this.txtMessages = new System.Windows.Forms.TextBox();
+            this.tlpTextBoxes = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.nudSizeInUnits)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffsetToRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffsetToFront)).BeginInit();
@@ -67,11 +75,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDamage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudWaveHeightPerStep)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumSteps)).BeginInit();
+            this.tlpTextBoxes.SuspendLayout();
             this.SuspendLayout();
             // 
             // nudSizeInUnits
             // 
-            this.nudSizeInUnits.Location = new System.Drawing.Point(195, 7);
+            this.nudSizeInUnits.Location = new System.Drawing.Point(232, 7);
             this.nudSizeInUnits.Name = "nudSizeInUnits";
             this.nudSizeInUnits.Size = new System.Drawing.Size(64, 20);
             this.nudSizeInUnits.TabIndex = 0;
@@ -84,7 +95,7 @@
             // lblSizeInUnits
             // 
             this.lblSizeInUnits.AutoSize = true;
-            this.lblSizeInUnits.Location = new System.Drawing.Point(102, 9);
+            this.lblSizeInUnits.Location = new System.Drawing.Point(139, 9);
             this.lblSizeInUnits.Name = "lblSizeInUnits";
             this.lblSizeInUnits.Size = new System.Drawing.Size(66, 13);
             this.lblSizeInUnits.TabIndex = 1;
@@ -93,7 +104,7 @@
             // lblTextureName
             // 
             this.lblTextureName.AutoSize = true;
-            this.lblTextureName.Location = new System.Drawing.Point(442, 9);
+            this.lblTextureName.Location = new System.Drawing.Point(479, 9);
             this.lblTextureName.Name = "lblTextureName";
             this.lblTextureName.Size = new System.Drawing.Size(75, 13);
             this.lblTextureName.TabIndex = 2;
@@ -102,7 +113,7 @@
             // lblOffsetToRight
             // 
             this.lblOffsetToRight.AutoSize = true;
-            this.lblOffsetToRight.Location = new System.Drawing.Point(102, 35);
+            this.lblOffsetToRight.Location = new System.Drawing.Point(139, 35);
             this.lblOffsetToRight.Name = "lblOffsetToRight";
             this.lblOffsetToRight.Size = new System.Drawing.Size(73, 13);
             this.lblOffsetToRight.TabIndex = 4;
@@ -110,7 +121,7 @@
             // 
             // nudOffsetToRight
             // 
-            this.nudOffsetToRight.Location = new System.Drawing.Point(195, 33);
+            this.nudOffsetToRight.Location = new System.Drawing.Point(232, 33);
             this.nudOffsetToRight.Name = "nudOffsetToRight";
             this.nudOffsetToRight.Size = new System.Drawing.Size(64, 20);
             this.nudOffsetToRight.TabIndex = 5;
@@ -118,7 +129,7 @@
             // lblOffsetToFront
             // 
             this.lblOffsetToFront.AutoSize = true;
-            this.lblOffsetToFront.Location = new System.Drawing.Point(265, 35);
+            this.lblOffsetToFront.Location = new System.Drawing.Point(302, 35);
             this.lblOffsetToFront.Name = "lblOffsetToFront";
             this.lblOffsetToFront.Size = new System.Drawing.Size(74, 13);
             this.lblOffsetToFront.TabIndex = 6;
@@ -126,7 +137,7 @@
             // 
             // nudOffsetToFront
             // 
-            this.nudOffsetToFront.Location = new System.Drawing.Point(372, 33);
+            this.nudOffsetToFront.Location = new System.Drawing.Point(409, 33);
             this.nudOffsetToFront.Name = "nudOffsetToFront";
             this.nudOffsetToFront.Size = new System.Drawing.Size(64, 20);
             this.nudOffsetToFront.TabIndex = 7;
@@ -134,7 +145,7 @@
             // lblOffsetToTop
             // 
             this.lblOffsetToTop.AutoSize = true;
-            this.lblOffsetToTop.Location = new System.Drawing.Point(442, 35);
+            this.lblOffsetToTop.Location = new System.Drawing.Point(479, 35);
             this.lblOffsetToTop.Name = "lblOffsetToTop";
             this.lblOffsetToTop.Size = new System.Drawing.Size(68, 13);
             this.lblOffsetToTop.TabIndex = 8;
@@ -142,7 +153,7 @@
             // 
             // nudOffsetToTop
             // 
-            this.nudOffsetToTop.Location = new System.Drawing.Point(523, 33);
+            this.nudOffsetToTop.Location = new System.Drawing.Point(567, 33);
             this.nudOffsetToTop.Name = "nudOffsetToTop";
             this.nudOffsetToTop.Size = new System.Drawing.Size(64, 20);
             this.nudOffsetToTop.TabIndex = 9;
@@ -152,7 +163,7 @@
             this.cmbTextureName.FormattingEnabled = true;
             this.cmbTextureName.Items.AddRange(new object[] {
             "METAL1_3"});
-            this.cmbTextureName.Location = new System.Drawing.Point(523, 6);
+            this.cmbTextureName.Location = new System.Drawing.Point(567, 6);
             this.cmbTextureName.Name = "cmbTextureName";
             this.cmbTextureName.Size = new System.Drawing.Size(139, 21);
             this.cmbTextureName.TabIndex = 10;
@@ -160,7 +171,7 @@
             // lblNumberOfRows
             // 
             this.lblNumberOfRows.AutoSize = true;
-            this.lblNumberOfRows.Location = new System.Drawing.Point(102, 87);
+            this.lblNumberOfRows.Location = new System.Drawing.Point(139, 87);
             this.lblNumberOfRows.Name = "lblNumberOfRows";
             this.lblNumberOfRows.Size = new System.Drawing.Size(84, 13);
             this.lblNumberOfRows.TabIndex = 11;
@@ -168,7 +179,7 @@
             // 
             // nudNumRows
             // 
-            this.nudNumRows.Location = new System.Drawing.Point(195, 85);
+            this.nudNumRows.Location = new System.Drawing.Point(232, 85);
             this.nudNumRows.Maximum = new decimal(new int[] {
             64,
             0,
@@ -192,7 +203,7 @@
             // lblNumberOfColumns
             // 
             this.lblNumberOfColumns.AutoSize = true;
-            this.lblNumberOfColumns.Location = new System.Drawing.Point(265, 87);
+            this.lblNumberOfColumns.Location = new System.Drawing.Point(302, 87);
             this.lblNumberOfColumns.Name = "lblNumberOfColumns";
             this.lblNumberOfColumns.Size = new System.Drawing.Size(101, 13);
             this.lblNumberOfColumns.TabIndex = 13;
@@ -200,7 +211,7 @@
             // 
             // nudNumColumns
             // 
-            this.nudNumColumns.Location = new System.Drawing.Point(372, 85);
+            this.nudNumColumns.Location = new System.Drawing.Point(409, 85);
             this.nudNumColumns.Maximum = new decimal(new int[] {
             64,
             0,
@@ -223,7 +234,7 @@
             // 
             // txtSumBlocks
             // 
-            this.txtSumBlocks.Location = new System.Drawing.Point(523, 85);
+            this.txtSumBlocks.Location = new System.Drawing.Point(567, 85);
             this.txtSumBlocks.Name = "txtSumBlocks";
             this.txtSumBlocks.ReadOnly = true;
             this.txtSumBlocks.Size = new System.Drawing.Size(64, 20);
@@ -233,7 +244,7 @@
             // lblSumBlocks
             // 
             this.lblSumBlocks.AutoSize = true;
-            this.lblSumBlocks.Location = new System.Drawing.Point(442, 87);
+            this.lblSumBlocks.Location = new System.Drawing.Point(479, 87);
             this.lblSumBlocks.Name = "lblSumBlocks";
             this.lblSumBlocks.Size = new System.Drawing.Size(77, 13);
             this.lblSumBlocks.TabIndex = 16;
@@ -241,20 +252,18 @@
             // 
             // txtOutput
             // 
-            this.txtOutput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtOutput.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtOutput.Location = new System.Drawing.Point(12, 140);
+            this.txtOutput.Location = new System.Drawing.Point(3, 3);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtOutput.Size = new System.Drawing.Size(649, 209);
+            this.txtOutput.Size = new System.Drawing.Size(909, 245);
             this.txtOutput.TabIndex = 17;
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(595, 85);
+            this.btnGenerate.Location = new System.Drawing.Point(637, 110);
             this.btnGenerate.Name = "btnGenerate";
             this.btnGenerate.Size = new System.Drawing.Size(67, 20);
             this.btnGenerate.TabIndex = 18;
@@ -265,7 +274,7 @@
             // lblBlockSpacing
             // 
             this.lblBlockSpacing.AutoSize = true;
-            this.lblBlockSpacing.Location = new System.Drawing.Point(265, 9);
+            this.lblBlockSpacing.Location = new System.Drawing.Point(302, 9);
             this.lblBlockSpacing.Name = "lblBlockSpacing";
             this.lblBlockSpacing.Size = new System.Drawing.Size(46, 13);
             this.lblBlockSpacing.TabIndex = 20;
@@ -273,7 +282,7 @@
             // 
             // nudSpacing
             // 
-            this.nudSpacing.Location = new System.Drawing.Point(372, 7);
+            this.nudSpacing.Location = new System.Drawing.Point(409, 7);
             this.nudSpacing.Maximum = new decimal(new int[] {
             64,
             0,
@@ -291,7 +300,7 @@
             // lblDamage
             // 
             this.lblDamage.AutoSize = true;
-            this.lblDamage.Location = new System.Drawing.Point(102, 61);
+            this.lblDamage.Location = new System.Drawing.Point(139, 61);
             this.lblDamage.Name = "lblDamage";
             this.lblDamage.Size = new System.Drawing.Size(50, 13);
             this.lblDamage.TabIndex = 22;
@@ -300,7 +309,7 @@
             // lblSpeed
             // 
             this.lblSpeed.AutoSize = true;
-            this.lblSpeed.Location = new System.Drawing.Point(265, 61);
+            this.lblSpeed.Location = new System.Drawing.Point(302, 61);
             this.lblSpeed.Name = "lblSpeed";
             this.lblSpeed.Size = new System.Drawing.Size(41, 13);
             this.lblSpeed.TabIndex = 23;
@@ -308,7 +317,7 @@
             // 
             // nudDamage
             // 
-            this.nudDamage.Location = new System.Drawing.Point(195, 59);
+            this.nudDamage.Location = new System.Drawing.Point(232, 59);
             this.nudDamage.Maximum = new decimal(new int[] {
             999,
             0,
@@ -320,7 +329,7 @@
             // 
             // nudSpeed
             // 
-            this.nudSpeed.Location = new System.Drawing.Point(372, 59);
+            this.nudSpeed.Location = new System.Drawing.Point(409, 59);
             this.nudSpeed.Maximum = new decimal(new int[] {
             256,
             0,
@@ -343,7 +352,7 @@
             // lblSound
             // 
             this.lblSound.AutoSize = true;
-            this.lblSound.Location = new System.Drawing.Point(442, 61);
+            this.lblSound.Location = new System.Drawing.Point(479, 61);
             this.lblSound.Name = "lblSound";
             this.lblSound.Size = new System.Drawing.Size(69, 13);
             this.lblSound.TabIndex = 26;
@@ -352,7 +361,7 @@
             // chkSound
             // 
             this.chkSound.AutoSize = true;
-            this.chkSound.Location = new System.Drawing.Point(523, 61);
+            this.chkSound.Location = new System.Drawing.Point(567, 61);
             this.chkSound.Name = "chkSound";
             this.chkSound.Size = new System.Drawing.Size(15, 14);
             this.chkSound.TabIndex = 27;
@@ -363,7 +372,7 @@
             this.picLogo.Image = ((System.Drawing.Image)(resources.GetObject("picLogo.Image")));
             this.picLogo.Location = new System.Drawing.Point(12, 10);
             this.picLogo.Name = "picLogo";
-            this.picLogo.Size = new System.Drawing.Size(84, 90);
+            this.picLogo.Size = new System.Drawing.Size(121, 121);
             this.picLogo.TabIndex = 28;
             this.picLogo.TabStop = false;
             // 
@@ -371,16 +380,133 @@
             // 
             this.prgGeneration.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.prgGeneration.Location = new System.Drawing.Point(12, 111);
+            this.prgGeneration.Location = new System.Drawing.Point(12, 137);
             this.prgGeneration.Name = "prgGeneration";
-            this.prgGeneration.Size = new System.Drawing.Size(649, 23);
+            this.prgGeneration.Size = new System.Drawing.Size(915, 23);
             this.prgGeneration.TabIndex = 29;
+            // 
+            // lblWaveHeightPerStep
+            // 
+            this.lblWaveHeightPerStep.AutoSize = true;
+            this.lblWaveHeightPerStep.Location = new System.Drawing.Point(139, 113);
+            this.lblWaveHeightPerStep.Name = "lblWaveHeightPerStep";
+            this.lblWaveHeightPerStep.Size = new System.Drawing.Size(79, 13);
+            this.lblWaveHeightPerStep.TabIndex = 30;
+            this.lblWaveHeightPerStep.Text = "Height per step";
+            // 
+            // nudWaveHeightPerStep
+            // 
+            this.nudWaveHeightPerStep.Location = new System.Drawing.Point(232, 111);
+            this.nudWaveHeightPerStep.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.nudWaveHeightPerStep.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudWaveHeightPerStep.Name = "nudWaveHeightPerStep";
+            this.nudWaveHeightPerStep.Size = new System.Drawing.Size(64, 20);
+            this.nudWaveHeightPerStep.TabIndex = 31;
+            this.nudWaveHeightPerStep.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudWaveHeightPerStep.ValueChanged += new System.EventHandler(this.nudWaveHeightPerStep_ValueChanged);
+            // 
+            // lblNumSteps
+            // 
+            this.lblNumSteps.AutoSize = true;
+            this.lblNumSteps.Location = new System.Drawing.Point(302, 113);
+            this.lblNumSteps.Name = "lblNumSteps";
+            this.lblNumSteps.Size = new System.Drawing.Size(87, 13);
+            this.lblNumSteps.TabIndex = 32;
+            this.lblNumSteps.Text = "Number of steps:";
+            // 
+            // nudNumSteps
+            // 
+            this.nudNumSteps.Location = new System.Drawing.Point(409, 111);
+            this.nudNumSteps.Maximum = new decimal(new int[] {
+            64,
+            0,
+            0,
+            0});
+            this.nudNumSteps.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudNumSteps.Name = "nudNumSteps";
+            this.nudNumSteps.Size = new System.Drawing.Size(64, 20);
+            this.nudNumSteps.TabIndex = 33;
+            this.nudNumSteps.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudNumSteps.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // lblTotalWaveAmplitude
+            // 
+            this.lblTotalWaveAmplitude.AutoSize = true;
+            this.lblTotalWaveAmplitude.Location = new System.Drawing.Point(479, 113);
+            this.lblTotalWaveAmplitude.Name = "lblTotalWaveAmplitude";
+            this.lblTotalWaveAmplitude.Size = new System.Drawing.Size(82, 13);
+            this.lblTotalWaveAmplitude.TabIndex = 35;
+            this.lblTotalWaveAmplitude.Text = "Total amplitude:";
+            // 
+            // txtTotalAmplitude
+            // 
+            this.txtTotalAmplitude.Location = new System.Drawing.Point(567, 110);
+            this.txtTotalAmplitude.Name = "txtTotalAmplitude";
+            this.txtTotalAmplitude.ReadOnly = true;
+            this.txtTotalAmplitude.Size = new System.Drawing.Size(64, 20);
+            this.txtTotalAmplitude.TabIndex = 34;
+            this.txtTotalAmplitude.Text = "1";
+            // 
+            // txtMessages
+            // 
+            this.txtMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMessages.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMessages.Location = new System.Drawing.Point(3, 254);
+            this.txtMessages.Multiline = true;
+            this.txtMessages.Name = "txtMessages";
+            this.txtMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMessages.Size = new System.Drawing.Size(909, 44);
+            this.txtMessages.TabIndex = 36;
+            // 
+            // tlpTextBoxes
+            // 
+            this.tlpTextBoxes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tlpTextBoxes.ColumnCount = 1;
+            this.tlpTextBoxes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpTextBoxes.Controls.Add(this.txtMessages, 0, 1);
+            this.tlpTextBoxes.Controls.Add(this.txtOutput, 0, 0);
+            this.tlpTextBoxes.Location = new System.Drawing.Point(12, 166);
+            this.tlpTextBoxes.Name = "tlpTextBoxes";
+            this.tlpTextBoxes.RowCount = 2;
+            this.tlpTextBoxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpTextBoxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tlpTextBoxes.Size = new System.Drawing.Size(915, 301);
+            this.tlpTextBoxes.TabIndex = 37;
             // 
             // frmQuakeWaveGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(673, 361);
+            this.ClientSize = new System.Drawing.Size(939, 479);
+            this.Controls.Add(this.tlpTextBoxes);
+            this.Controls.Add(this.lblTotalWaveAmplitude);
+            this.Controls.Add(this.txtTotalAmplitude);
+            this.Controls.Add(this.nudNumSteps);
+            this.Controls.Add(this.lblNumSteps);
+            this.Controls.Add(this.nudWaveHeightPerStep);
+            this.Controls.Add(this.lblWaveHeightPerStep);
             this.Controls.Add(this.prgGeneration);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.chkSound);
@@ -392,7 +518,6 @@
             this.Controls.Add(this.nudSpacing);
             this.Controls.Add(this.lblBlockSpacing);
             this.Controls.Add(this.btnGenerate);
-            this.Controls.Add(this.txtOutput);
             this.Controls.Add(this.lblSumBlocks);
             this.Controls.Add(this.txtSumBlocks);
             this.Controls.Add(this.nudNumColumns);
@@ -410,7 +535,7 @@
             this.Controls.Add(this.lblSizeInUnits);
             this.Controls.Add(this.nudSizeInUnits);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(600, 400);
+            this.MinimumSize = new System.Drawing.Size(700, 400);
             this.Name = "frmQuakeWaveGenerator";
             this.Text = "Quake Wave Generator";
             this.Load += new System.EventHandler(this.frmQuakeWaveGenerator_Load);
@@ -424,6 +549,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudDamage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSpeed)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudWaveHeightPerStep)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudNumSteps)).EndInit();
+            this.tlpTextBoxes.ResumeLayout(false);
+            this.tlpTextBoxes.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -459,6 +588,14 @@
         private System.Windows.Forms.CheckBox chkSound;
         private System.Windows.Forms.PictureBox picLogo;
         private System.Windows.Forms.ProgressBar prgGeneration;
+        private System.Windows.Forms.Label lblWaveHeightPerStep;
+        private System.Windows.Forms.NumericUpDown nudWaveHeightPerStep;
+        private System.Windows.Forms.Label lblNumSteps;
+        private System.Windows.Forms.NumericUpDown nudNumSteps;
+        private System.Windows.Forms.Label lblTotalWaveAmplitude;
+        private System.Windows.Forms.TextBox txtTotalAmplitude;
+        private System.Windows.Forms.TextBox txtMessages;
+        private System.Windows.Forms.TableLayoutPanel tlpTextBoxes;
     }
 }
 

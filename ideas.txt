@@ -1,0 +1,4 @@
+﻿- Add the path_corner entities alongside with each func_train entity
+- Wave amplitude (check with number of rows and/or columns)
+- Wave direction (horizontal, vertical, diagonal)
+- Multi-lingual

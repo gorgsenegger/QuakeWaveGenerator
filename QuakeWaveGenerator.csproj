@@ -81,6 +81,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ideas.txt" />
+    <Content Include="img\QuakeWaveGenerator-121x121.png" />
     <Content Include="img\QuakeWaveGenerator-16x16.ico" />
     <Content Include="img\QuakeWaveGenerator-16x16.png" />
     <Content Include="img\QuakeWaveGenerator-48x52.png" />
