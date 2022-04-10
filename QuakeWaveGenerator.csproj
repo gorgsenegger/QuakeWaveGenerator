@@ -53,6 +53,8 @@
     <Compile Include="frmQuakeWaveGenerator.Designer.cs">
       <DependentUpon>frmQuakeWaveGenerator.cs</DependentUpon>
     </Compile>
+    <Compile Include="MapFileTool.cs" />
+    <Compile Include="PathCornerType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmQuakeWaveGenerator.resx">

@@ -6,6 +6,8 @@ namespace QuakeWaveGenerator
 {
     public partial class frmQuakeWaveGenerator : Form
     {
+        private MapFileTool m_MapFileTool = new MapFileTool();
+
         public frmQuakeWaveGenerator()
         {
             InitializeComponent();
@@ -20,6 +22,8 @@ namespace QuakeWaveGenerator
                 if (numericUpDown != null)
                 {
                     numericUpDown.Click += SelectAllText;
+                    numericUpDown.GotFocus += SelectAllText;
+                    numericUpDown.LostFocus += HandleLostFocus;
                 }
             }
         }
@@ -115,133 +119,70 @@ namespace QuakeWaveGenerator
             txtOutput.Invoke(new MethodInvoker(delegate
             {
                 txtOutput.AppendText("{" + Environment.NewLine);
-                string baseTargetName = generateBaseTargetName(row, column);
-                txtOutput.AppendText(generateBlockSettings(row, column, baseTargetName));
+                string baseTargetName = m_MapFileTool.GenerateBaseTargetName(row, column);
+                txtOutput.AppendText(m_MapFileTool.GenerateFuncTrainSettings(row, column, baseTargetName, chkSound.Checked));
 
                 // Left face
-                generateFace(
-                    left_front_top_x, left_front_top_y, left_front_top_z,
-                    left_front_bottom_x, left_front_bottom_y, left_front_bottom_z,
-                    left_back_top_x, left_back_top_y, left_back_top_z);
+                txtOutput.AppendText(
+                 m_MapFileTool.GenerateFace(
+                        left_front_top_x, left_front_top_y, left_front_top_z,
+                        left_front_bottom_x, left_front_bottom_y, left_front_bottom_z,
+                        left_back_top_x, left_back_top_y, left_back_top_z,
+                        cmbTextureName.SelectedItem.ToString()));
 
                 // Right face
-                generateFace(
-                    right_back_top_x, right_back_top_y, right_back_top_z,
-                    right_back_bottom_x, right_back_bottom_y, right_back_bottom_z,
-                    right_front_top_x, right_front_top_y, right_front_top_z);
+                txtOutput.AppendText(
+                    m_MapFileTool.GenerateFace(
+                        right_back_top_x, right_back_top_y, right_back_top_z,
+                        right_back_bottom_x, right_back_bottom_y, right_back_bottom_z,
+                        right_front_top_x, right_front_top_y, right_front_top_z,
+                        cmbTextureName.SelectedItem.ToString()));
 
                 // Front face
-                generateFace(
-                    right_front_top_x, right_front_top_y, right_front_top_z,
-                    right_front_bottom_x, right_front_bottom_y, right_front_bottom_z,
-                    left_front_top_x, left_front_top_y, left_front_top_z);
+                txtOutput.AppendText(
+                    m_MapFileTool.GenerateFace(
+                        right_front_top_x, right_front_top_y, right_front_top_z,
+                        right_front_bottom_x, right_front_bottom_y, right_front_bottom_z,
+                        left_front_top_x, left_front_top_y, left_front_top_z,
+                        cmbTextureName.SelectedItem.ToString()));
 
                 // Back face
-                generateFace(
-                    left_back_top_x, left_back_top_y, left_back_top_z,
-                    left_back_bottom_x, left_back_bottom_y, left_back_bottom_z,
-                    right_back_top_x, right_back_top_y, right_back_top_z);
+                txtOutput.AppendText(
+                    m_MapFileTool.GenerateFace(
+                        left_back_top_x, left_back_top_y, left_back_top_z,
+                        left_back_bottom_x, left_back_bottom_y, left_back_bottom_z,
+                        right_back_top_x, right_back_top_y, right_back_top_z,
+                        cmbTextureName.SelectedItem.ToString()));
 
                 // Bottom face
-                generateFace(
-                    left_back_bottom_x, left_back_bottom_y, left_back_bottom_z,
-                    left_front_bottom_x, left_front_bottom_y, left_front_bottom_z,
-                    right_back_bottom_x, right_back_bottom_y, right_back_bottom_z);
+                txtOutput.AppendText(
+                    m_MapFileTool.GenerateFace(
+                        left_back_bottom_x, left_back_bottom_y, left_back_bottom_z,
+                        left_front_bottom_x, left_front_bottom_y, left_front_bottom_z,
+                        right_back_bottom_x, right_back_bottom_y, right_back_bottom_z,
+                        cmbTextureName.SelectedItem.ToString()));
 
                 // Top face
-                generateFace(
-                    right_front_top_x, right_front_top_y, right_front_top_z,
-                    left_front_top_x, left_front_top_y, left_front_top_z,
-                    right_back_top_x, right_back_top_y, right_back_top_z);
+                txtOutput.AppendText(
+                    m_MapFileTool.GenerateFace(
+                        right_front_top_x, right_front_top_y, right_front_top_z,
+                        left_front_top_x, left_front_top_y, left_front_top_z,
+                        right_back_top_x, right_back_top_y, right_back_top_z,
+                        cmbTextureName.SelectedItem.ToString()));
                 txtOutput.AppendText("}" + Environment.NewLine);
 
                 // TODO Generate path_corners: init, top, bottom
-                txtOutput.AppendText(
-                    generatePathCornerInit(
-                        baseTargetName, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z +
-                        Convert.ToInt32(nudNumSteps.Value * nudWaveHeightPerStep.Value)));  // The peak amplitude
                 // TODO: We need to vary the z coordinates for each init path_corner (based on direction of wave and number of steps)
-
                 txtOutput.AppendText(
-                    generatePathCornerBottom(
-                        baseTargetName, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z));
-
+                  m_MapFileTool.GeneratePathCorner(
+                        baseTargetName, PathCornerType.Init, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z));
                 txtOutput.AppendText(
-                    generatePathCornerTop(
-                        baseTargetName, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z +
-                        Convert.ToInt32(nudNumSteps.Value * nudWaveHeightPerStep.Value)));  // The peak amplitude
+                    m_MapFileTool.GeneratePathCorner(
+                        baseTargetName, PathCornerType.Bottom, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z));
+                txtOutput.AppendText(
+                    m_MapFileTool.GeneratePathCorner(
+                        baseTargetName, PathCornerType.Top, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z));
             }));
-        }
-
-        private string generateBlockSettings(int row, int column, string baseTargetName)
-        {
-            int makeSound = chkSound.Checked ? 1 : 0;
-            return string.Format(
-                @"  ""classname"" ""func_train""" + Environment.NewLine +
-                @"  ""dmg"" ""0""" + Environment.NewLine +
-                @"  ""speed"" ""32""" + Environment.NewLine +
-                @"  ""sounds"" ""{0}""" + Environment.NewLine +
-                @"  ""target"" ""{1}""" + Environment.NewLine +
-                @"  {{" + Environment.NewLine, makeSound, baseTargetName + "_init");
-        }
-
-        private string generateBaseTargetName(int row, int column)
-        {
-            return "train_row-" + row.ToString("D3") + "_column-" + column.ToString("D3");
-        }
-
-        private string generatePathCornerInit(string baseTargetName, int x, int y, int z)
-        {
-            return string.Format(@"{{" + Environment.NewLine +
-                @"  ""classname"" ""path_corner""" + Environment.NewLine +
-                @"  ""targetname"" ""{0}""" + Environment.NewLine +
-                @"  ""target"" ""{1}""" + Environment.NewLine +
-                @"  ""origin"" ""{2} {3} {4}""" + Environment.NewLine +
-                @"}}", baseTargetName + "_init", baseTargetName + "_bottom", x, y, z);
-            // {
-            //   "classname" "path_corner"
-            //   "targetname" "w11init"
-            //   "target" "w11b"
-            //   "origin" "-832 -134 246"
-            // }
-            // targetname train_row-001_column-001_init
-            // target train_row-001_column-001_bottom
-
-        }
-
-        private string generatePathCornerBottom(string baseTargetName, int x, int y, int z)
-        {
-            return string.Format(@"{{" + Environment.NewLine +
-                @"  ""classname"" ""path_corner""" + Environment.NewLine +
-                @"  ""targetname"" ""{0}""" + Environment.NewLine +
-                @"  ""target"" ""{1}""" + Environment.NewLine +
-                @"  ""origin"" ""{2} {3} {4}""" + Environment.NewLine +
-                @"}}", baseTargetName + "_bottom", baseTargetName + "_top", x, y, z);
-            // targetname train_row-001_column-001_init
-            // target train_row-001_column-001_bottom
-            return string.Empty;
-        }
-
-        private string generatePathCornerTop(string baseTargetName, int x, int y, int z)
-        {
-            return string.Format(@"{{" + Environment.NewLine +
-                @"  ""classname"" ""path_corner""" + Environment.NewLine +
-                @"  ""targetname"" ""{0}""" + Environment.NewLine +
-                @"  ""target"" ""{1}""" + Environment.NewLine +
-                @"  ""origin"" ""{2} {3} {4}""" + Environment.NewLine +
-                @"}}", baseTargetName + "_top", baseTargetName + "_bottom", x, y, z);
-            // targetname train_row-001_column-001_init
-            // target train_row-001_column-001_bottom
-            return string.Empty;
-        }
-
-
-        private void generateFace(int x1, int y1, int z1, int x2, int y2, int z2, int x3, int y3, int z3)
-        {
-            string texture = cmbTextureName.SelectedItem + " 0 0 0 1 1";
-            txtOutput.AppendText(
-                string.Format("    ({0} {1} {2}) ({3} {4} {5}) ({6} {7} {8}) {9}", x1, y1, z1, x2, y2, z2, x3, y3, z3, texture) +
-                Environment.NewLine);
         }
 
         private void SelectAllText(object sender, EventArgs e)
@@ -251,6 +192,11 @@ namespace QuakeWaveGenerator
             {
                 numericUpDown.Select(0, numericUpDown.Value.ToString().Length);
             }
+        }
+
+        private void HandleLostFocus(object sender, EventArgs e)
+        {
+            UpdateSumBlocks();
         }
 
         private void nudWaveHeightPerStep_ValueChanged(object sender, EventArgs e)
