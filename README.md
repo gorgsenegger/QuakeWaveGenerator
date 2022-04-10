@@ -1,4 +1,8 @@
 # QuakeWaveGenerator
+
+## Disclaimer
+🔴**This is still work in progress, the path_corner entities are not done yet**🔴
+
 A Winforms application to automate the creation of multiple `func_train` "blocks", laid out in a horizontal grid where you can configure the number of "rows" and "columns". The blocks only move horizontally and, by timing the amplitudes of that movement, give the impression of a wave. The output of this program will be in the format as required by the Quake map file specifications, e.g.
 
 ```
