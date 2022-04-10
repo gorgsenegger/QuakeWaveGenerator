@@ -44,18 +44,19 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmMain.cs">
+    <Compile Include="frmQuakeWaveGenerator.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmMain.Designer.cs">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <Compile Include="frmQuakeWaveGenerator.Designer.cs">
+      <DependentUpon>frmQuakeWaveGenerator.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="frmMain.resx">
-      <DependentUpon>frmMain.cs</DependentUpon>
+    <EmbeddedResource Include="frmQuakeWaveGenerator.resx">
+      <DependentUpon>frmQuakeWaveGenerator.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -78,6 +79,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="img\QuakeWaveGenerator-16x16.ico" />
+    <Content Include="img\QuakeWaveGenerator-16x16.png" />
+    <Content Include="img\QuakeWaveGenerator-48x52.png" />
+    <Content Include="img\QuakeWaveGenerator-84x90.png" />
+    <Content Include="img\QuakeWaveGenerator-NoShadow.ico" />
+    <Content Include="img\QuakeWaveGenerator-NoShadow.png" />
+    <Content Include="img\QuakeWaveGenerator.ico" />
+    <Content Include="img\QuakeWaveGenerator.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
