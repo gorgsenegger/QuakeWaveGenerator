@@ -63,8 +63,11 @@
             this.nudNumSteps = new System.Windows.Forms.NumericUpDown();
             this.lblTotalWaveAmplitude = new System.Windows.Forms.Label();
             this.txtTotalAmplitude = new System.Windows.Forms.TextBox();
-            this.txtMessages = new System.Windows.Forms.TextBox();
             this.tlpTextBoxes = new System.Windows.Forms.TableLayoutPanel();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.txtMessages = new System.Windows.Forms.TextBox();
+            this.btnCopyGeneratedCode = new System.Windows.Forms.Button();
+            this.btnClearGeneratedText = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.nudSizeInUnits)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffsetToRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffsetToFront)).BeginInit();
@@ -252,20 +255,21 @@
             // 
             // txtOutput
             // 
+            this.tlpTextBoxes.SetColumnSpan(this.txtOutput, 2);
             this.txtOutput.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtOutput.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtOutput.Location = new System.Drawing.Point(3, 3);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtOutput.Size = new System.Drawing.Size(909, 245);
+            this.txtOutput.Size = new System.Drawing.Size(877, 210);
             this.txtOutput.TabIndex = 17;
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(637, 110);
+            this.btnGenerate.Location = new System.Drawing.Point(567, 136);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(67, 20);
+            this.btnGenerate.Size = new System.Drawing.Size(64, 20);
             this.btnGenerate.TabIndex = 18;
             this.btnGenerate.Text = "&Generate";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -380,9 +384,9 @@
             // 
             this.prgGeneration.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.prgGeneration.Location = new System.Drawing.Point(12, 137);
+            this.prgGeneration.Location = new System.Drawing.Point(12, 162);
             this.prgGeneration.Name = "prgGeneration";
-            this.prgGeneration.Size = new System.Drawing.Size(915, 23);
+            this.prgGeneration.Size = new System.Drawing.Size(710, 23);
             this.prgGeneration.TabIndex = 29;
             // 
             // lblWaveHeightPerStep
@@ -467,39 +471,78 @@
             this.txtTotalAmplitude.TabIndex = 34;
             this.txtTotalAmplitude.Text = "1";
             // 
-            // txtMessages
-            // 
-            this.txtMessages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMessages.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMessages.Location = new System.Drawing.Point(3, 254);
-            this.txtMessages.Multiline = true;
-            this.txtMessages.Name = "txtMessages";
-            this.txtMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessages.Size = new System.Drawing.Size(909, 44);
-            this.txtMessages.TabIndex = 36;
-            // 
             // tlpTextBoxes
             // 
             this.tlpTextBoxes.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tlpTextBoxes.ColumnCount = 1;
+            this.tlpTextBoxes.ColumnCount = 2;
             this.tlpTextBoxes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpTextBoxes.Controls.Add(this.txtMessages, 0, 1);
+            this.tlpTextBoxes.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlpTextBoxes.Controls.Add(this.txtMessages, 0, 2);
             this.tlpTextBoxes.Controls.Add(this.txtOutput, 0, 0);
-            this.tlpTextBoxes.Location = new System.Drawing.Point(12, 166);
+            this.tlpTextBoxes.Controls.Add(this.btnClearGeneratedText, 1, 1);
+            this.tlpTextBoxes.Controls.Add(this.btnCopyGeneratedCode, 0, 1);
+            this.tlpTextBoxes.Location = new System.Drawing.Point(12, 191);
             this.tlpTextBoxes.Name = "tlpTextBoxes";
-            this.tlpTextBoxes.RowCount = 2;
+            this.tlpTextBoxes.RowCount = 3;
             this.tlpTextBoxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpTextBoxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 50F));
-            this.tlpTextBoxes.Size = new System.Drawing.Size(915, 301);
+            this.tlpTextBoxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
+            this.tlpTextBoxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
+            this.tlpTextBoxes.Size = new System.Drawing.Size(710, 258);
             this.tlpTextBoxes.TabIndex = 37;
+            // 
+            // btnCancel
+            // 
+            this.btnCancel.Enabled = false;
+            this.btnCancel.Location = new System.Drawing.Point(642, 136);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(64, 20);
+            this.btnCancel.TabIndex = 38;
+            this.btnCancel.Text = "&Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+            // 
+            // txtMessages
+            // 
+            this.tlpTextBoxes.SetColumnSpan(this.txtMessages, 2);
+            this.txtMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMessages.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMessages.Location = new System.Drawing.Point(3, 259);
+            this.txtMessages.Multiline = true;
+            this.txtMessages.Name = "txtMessages";
+            this.txtMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMessages.Size = new System.Drawing.Size(877, 74);
+            this.txtMessages.TabIndex = 37;
+            // 
+            // btnCopyGeneratedCode
+            // 
+            this.btnCopyGeneratedCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopyGeneratedCode.Location = new System.Drawing.Point(717, 237);
+            this.btnCopyGeneratedCode.Name = "btnCopyGeneratedCode";
+            this.btnCopyGeneratedCode.Size = new System.Drawing.Size(100, 23);
+            this.btnCopyGeneratedCode.TabIndex = 38;
+            this.btnCopyGeneratedCode.Text = "Copy to Clipboard";
+            this.btnCopyGeneratedCode.UseVisualStyleBackColor = true;
+            this.btnCopyGeneratedCode.Click += new System.EventHandler(this.btnCopyGeneratedCode_Click);
+            // 
+            // btnClearGeneratedText
+            // 
+            this.btnClearGeneratedText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearGeneratedText.Location = new System.Drawing.Point(884, 230);
+            this.btnClearGeneratedText.Name = "btnClearGeneratedText";
+            this.btnClearGeneratedText.Size = new System.Drawing.Size(100, 23);
+            this.btnClearGeneratedText.TabIndex = 39;
+            this.btnClearGeneratedText.Text = "Clear";
+            this.btnClearGeneratedText.UseVisualStyleBackColor = true;
+            this.btnClearGeneratedText.Click += new System.EventHandler(this.btnClearGeneratedText_Click);
             // 
             // frmQuakeWaveGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(939, 479);
+            this.ClientSize = new System.Drawing.Size(734, 461);
+            this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.tlpTextBoxes);
             this.Controls.Add(this.lblTotalWaveAmplitude);
             this.Controls.Add(this.txtTotalAmplitude);
@@ -535,7 +578,7 @@
             this.Controls.Add(this.lblSizeInUnits);
             this.Controls.Add(this.nudSizeInUnits);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(700, 400);
+            this.MinimumSize = new System.Drawing.Size(750, 500);
             this.Name = "frmQuakeWaveGenerator";
             this.Text = "Quake Wave Generator";
             this.Load += new System.EventHandler(this.frmQuakeWaveGenerator_Load);
@@ -594,8 +637,11 @@
         private System.Windows.Forms.NumericUpDown nudNumSteps;
         private System.Windows.Forms.Label lblTotalWaveAmplitude;
         private System.Windows.Forms.TextBox txtTotalAmplitude;
-        private System.Windows.Forms.TextBox txtMessages;
         private System.Windows.Forms.TableLayoutPanel tlpTextBoxes;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.TextBox txtMessages;
+        private System.Windows.Forms.Button btnCopyGeneratedCode;
+        private System.Windows.Forms.Button btnClearGeneratedText;
     }
 }
 

@@ -7,6 +7,7 @@ namespace QuakeWaveGenerator
     public partial class frmQuakeWaveGenerator : Form
     {
         private MapFileTool m_MapFileTool = new MapFileTool();
+        private bool m_Cancelled = false;
 
         public frmQuakeWaveGenerator()
         {
@@ -51,16 +52,28 @@ namespace QuakeWaveGenerator
         private async void btnGenerate_Click(object sender, EventArgs e)
         {
             txtOutput.Clear();
+            btnCancel.Enabled = true;
             decimal percentagePerBlock = Convert.ToDecimal(100) / Convert.ToDecimal(nudNumRows.Value * nudNumColumns.Value);
             for (int row = 1; row <= nudNumRows.Value; row++)
             {
                 for (int column = 1; column <= nudNumColumns.Value; column++)
                 {
+                    if (m_Cancelled)
+                    {
+                        LogMessage("Generation cancelled.", Severity.Info);
+                        prgGeneration.Value = 0;
+                        m_Cancelled = false;
+                        btnCancel.Enabled = false;
+                        return;
+                    }
+
                     int percentage = Convert.ToInt32(percentagePerBlock * ((row - 1) * nudNumColumns.Value + column));
                     await Task.Run(() => UpdateProgressBar(percentage));
                     await Task.Run(() => generateBlock(row, column));
                 }
             }
+
+            btnCancel.Enabled = false;
         }
 
         public void UpdateProgressBar(int percentage)
@@ -213,11 +226,37 @@ namespace QuakeWaveGenerator
         {
             if (nudNumSteps.Value > Math.Max(nudNumRows.Value, nudNumColumns.Value))
             {
-                txtMessages.AppendText("Num steps for wave must not be greater than the number of rows or columns!");
+                LogMessage("Num steps for wave must not be greater than the number of rows or columns!", Severity.Warning);
                 return;
             }
 
             txtTotalAmplitude.Text = Convert.ToString(nudWaveHeightPerStep.Value * nudNumSteps.Value);
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            m_Cancelled = true;
+        }
+
+        private void LogMessage(string message, Severity severity)
+        {
+            string outputMessage =
+                string.Format("{0} {1} - {2} - {3}", DateTime.Now.ToShortDateString(), DateTime.Now.ToLongTimeString(), severity, message);
+            txtMessages.AppendText(outputMessage + Environment.NewLine);
+        }
+
+        private void btnCopyGeneratedCode_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtOutput.Text))
+            {
+                Clipboard.SetText(txtOutput.Text);
+            }
+        }
+
+        private void btnClearGeneratedText_Click(object sender, EventArgs e)
+        {
+            txtOutput.Clear();
+            prgGeneration.Value = 0;
         }
     }
 }

@@ -57,6 +57,7 @@
     <Compile Include="PathCornerType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Severity.cs" />
     <EmbeddedResource Include="frmQuakeWaveGenerator.resx">
       <DependentUpon>frmQuakeWaveGenerator.cs</DependentUpon>
     </EmbeddedResource>
@@ -78,6 +79,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -93,6 +95,7 @@
     <Content Include="img\QuakeWaveGenerator-NoShadow.png" />
     <Content Include="img\QuakeWaveGenerator.ico" />
     <Content Include="img\QuakeWaveGenerator.png" />
+    <Content Include="QuakeWaveGenerator.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
