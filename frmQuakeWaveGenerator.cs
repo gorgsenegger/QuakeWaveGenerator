@@ -7,23 +7,31 @@ using System.Windows.Forms;
 
 namespace QuakeWaveGenerator
 {
+    /// <summary>
+    /// Main form of the application.
+    /// </summary>
     public partial class frmQuakeWaveGenerator : Form
     {
-        private MapFileTool m_MapFileTool = new MapFileTool();
+        private readonly MapFileTool m_MapFileTool = new MapFileTool();
         private bool m_Cancelled = false;
 
+        /// <summary>
+        /// Initialises a new instance of the <see cref="frmQuakeWaveGenerator"/> form.
+        /// </summary>
         public frmQuakeWaveGenerator()
         {
             InitializeComponent();
             SetupNumericUpDownControls();
         }
 
+        /// <summary>
+        /// Attach event handlers that are the same for each instance of the NumericUpDownControl.
+        /// </summary>
         private void SetupNumericUpDownControls()
         {
             foreach (Control control in Controls)
             {
-                NumericUpDown numericUpDown = control as NumericUpDown;
-                if (numericUpDown != null)
+                if (control is NumericUpDown numericUpDown)
                 {
                     numericUpDown.Click += SelectAllText;
                     numericUpDown.GotFocus += SelectAllText;
@@ -81,7 +89,7 @@ namespace QuakeWaveGenerator
             btnCancel.Enabled = false;
         }
 
-        public void UpdateProgressBar(int percentage)
+        private void UpdateProgressBar(int percentage)
         {
             prgGeneration.Invoke(new MethodInvoker(delegate { prgGeneration.Value = percentage; }));
         }
@@ -207,8 +215,7 @@ namespace QuakeWaveGenerator
 
         private void SelectAllText(object sender, EventArgs e)
         {
-            NumericUpDown numericUpDown = sender as NumericUpDown;
-            if (numericUpDown != null)
+            if (sender is NumericUpDown numericUpDown)
             {
                 numericUpDown.Select(0, numericUpDown.Value.ToString().Length);
             }

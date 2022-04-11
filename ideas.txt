@@ -3,3 +3,4 @@
 - Wave direction (horizontal, vertical, diagonal)
 - Multi-lingual
 - Fix int/decimal stuff
+- Classes for the entities

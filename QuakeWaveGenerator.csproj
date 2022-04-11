@@ -1,102 +1,125 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{4452CE84-1B13-46F4-8BFC-CF1086D4DDEC}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>QuakeWaveGenerator</RootNamespace>
-    <AssemblyName>QuakeWaveGenerator</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <Deterministic>true</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="frmQuakeWaveGenerator.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmQuakeWaveGenerator.Designer.cs">
-      <DependentUpon>frmQuakeWaveGenerator.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MapFileTool.cs" />
-    <Compile Include="PathCornerType.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Severity.cs" />
-    <EmbeddedResource Include="frmQuakeWaveGenerator.resx">
-      <DependentUpon>frmQuakeWaveGenerator.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-    <None Include="README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ideas.txt" />
-    <Content Include="img\QuakeWaveGenerator-121x121.png" />
-    <Content Include="img\QuakeWaveGenerator-16x16.ico" />
-    <Content Include="img\QuakeWaveGenerator-16x16.png" />
-    <Content Include="img\QuakeWaveGenerator-48x52.png" />
-    <Content Include="img\QuakeWaveGenerator-84x90.png" />
-    <Content Include="img\QuakeWaveGenerator-Multi-Resolution.ico" />
-    <Content Include="img\QuakeWaveGenerator-NoShadow.ico" />
-    <Content Include="img\QuakeWaveGenerator-NoShadow.png" />
-    <Content Include="img\QuakeWaveGenerator.ico" />
-    <Content Include="img\QuakeWaveGenerator.png" />
-    <Content Include="QuakeWaveGenerator.mp4" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+	<Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+	<PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+		<Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+		<ProjectGuid>{4452CE84-1B13-46F4-8BFC-CF1086D4DDEC}</ProjectGuid>
+		<OutputType>WinExe</OutputType>
+		<RootNamespace>QuakeWaveGenerator</RootNamespace>
+		<AssemblyName>QuakeWaveGenerator</AssemblyName>
+		<TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+		<FileAlignment>512</FileAlignment>
+		<AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+		<Deterministic>true</Deterministic>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<DebugSymbols>true</DebugSymbols>
+		<DebugType>full</DebugType>
+		<Optimize>false</Optimize>
+		<OutputPath>bin\Debug\</OutputPath>
+		<DefineConstants>DEBUG;TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<DocumentationFile>bin\Debug\QuakeWaveGenerator.xml</DocumentationFile>
+		<CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+		<RunCodeAnalysis>false</RunCodeAnalysis>
+		<CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+		<PlatformTarget>AnyCPU</PlatformTarget>
+		<DebugType>pdbonly</DebugType>
+		<Optimize>true</Optimize>
+		<OutputPath>bin\Release\</OutputPath>
+		<DefineConstants>TRACE</DefineConstants>
+		<ErrorReport>prompt</ErrorReport>
+		<WarningLevel>4</WarningLevel>
+		<DocumentationFile>bin\Release\QuakeWaveGenerator.xml</DocumentationFile>
+		<CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+		<RunCodeAnalysis>true</RunCodeAnalysis>
+		<CodeAnalysisIgnoreGeneratedCode>true</CodeAnalysisIgnoreGeneratedCode>
+	</PropertyGroup>
+	<PropertyGroup>
+		<EnableNETAnalyzers>true</EnableNETAnalyzers>
+	</PropertyGroup>
+	<PropertyGroup>
+		<AnalysisMode>Recommended</AnalysisMode>
+	</PropertyGroup>
+	<PropertyGroup>
+		<StartupObject>QuakeWaveGenerator.Program</StartupObject>
+	</PropertyGroup>
+	<PropertyGroup>
+		<ApplicationIcon>QuakeWaveGenerator-Multi-Resolution.ico</ApplicationIcon>
+	</PropertyGroup>
+	<ItemGroup>
+		<Reference Include="System" />
+		<Reference Include="System.Core" />
+		<Reference Include="System.Xml.Linq" />
+		<Reference Include="System.Data.DataSetExtensions" />
+		<Reference Include="Microsoft.CSharp" />
+		<Reference Include="System.Data" />
+		<Reference Include="System.Deployment" />
+		<Reference Include="System.Drawing" />
+		<Reference Include="System.Net.Http" />
+		<Reference Include="System.Windows.Forms" />
+		<Reference Include="System.Xml" />
+		<Reference Include="WindowsBase" />
+	</ItemGroup>
+	<ItemGroup>
+		<Compile Include="frmQuakeWaveGenerator.cs">
+			<SubType>Form</SubType>
+		</Compile>
+		<Compile Include="frmQuakeWaveGenerator.Designer.cs">
+			<DependentUpon>frmQuakeWaveGenerator.cs</DependentUpon>
+		</Compile>
+		<Compile Include="GlobalSuppressions.cs" />
+		<Compile Include="MapFileTool.cs" />
+		<Compile Include="PathCornerType.cs" />
+		<Compile Include="Program.cs" />
+		<Compile Include="Properties\AssemblyInfo.cs" />
+		<Compile Include="Severity.cs" />
+		<EmbeddedResource Include="frmQuakeWaveGenerator.resx">
+			<DependentUpon>frmQuakeWaveGenerator.cs</DependentUpon>
+			<SubType>Designer</SubType>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Properties\Resources.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>Resources.Designer.cs</LastGenOutput>
+			<SubType>Designer</SubType>
+		</EmbeddedResource>
+		<Compile Include="Properties\Resources.Designer.cs">
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Resources.resx</DependentUpon>
+		</Compile>
+		<None Include="Properties\Settings.settings">
+			<Generator>SettingsSingleFileGenerator</Generator>
+			<LastGenOutput>Settings.Designer.cs</LastGenOutput>
+		</None>
+		<Compile Include="Properties\Settings.Designer.cs">
+			<AutoGen>True</AutoGen>
+			<DependentUpon>Settings.settings</DependentUpon>
+			<DesignTimeSharedInput>True</DesignTimeSharedInput>
+		</Compile>
+		<None Include="README.md" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Include="App.config" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="ideas.txt" />
+		<Content Include="img\QuakeWaveGenerator-121x121.png" />
+		<Content Include="img\QuakeWaveGenerator-16x16.ico" />
+		<Content Include="img\QuakeWaveGenerator-16x16.png" />
+		<Content Include="img\QuakeWaveGenerator-48x52.png" />
+		<Content Include="img\QuakeWaveGenerator-84x90.png" />
+		<Content Include="img\QuakeWaveGenerator-Multi-Resolution.ico" />
+		<Content Include="img\QuakeWaveGenerator-NoShadow.ico" />
+		<Content Include="img\QuakeWaveGenerator-NoShadow.png" />
+		<Content Include="img\QuakeWaveGenerator.ico" />
+		<Content Include="img\QuakeWaveGenerator.png" />
+		<Content Include="QuakeWaveGenerator-Multi-Resolution.ico" />
+		<Content Include="QuakeWaveGenerator.mp4" />
+	</ItemGroup>
+	<Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

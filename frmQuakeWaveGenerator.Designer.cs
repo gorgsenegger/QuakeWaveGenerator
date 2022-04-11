@@ -1,4 +1,5 @@
-﻿namespace QuakeWaveGenerator
+﻿#pragma warning disable CS1591
+namespace QuakeWaveGenerator
 {
     partial class frmQuakeWaveGenerator
     {
@@ -673,3 +674,4 @@
     }
 }
 
+#pragma warning restore CS1591
