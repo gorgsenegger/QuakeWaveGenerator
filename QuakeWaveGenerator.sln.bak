@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuakeWaveGenerator", "QuakeWaveGenerator\QuakeWaveGenerator.csproj", "{4452CE84-1B13-46F4-8BFC-CF1086D4DDEC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuakeWaveGenerator", "QuakeWaveGenerator.csproj", "{4452CE84-1B13-46F4-8BFC-CF1086D4DDEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuakeWaveGeneratorTest", "QuakeWaveGeneratorTest\QuakeWaveGeneratorTest.csproj", "{4108F423-75BD-44A5-A1D2-8703AEE7CEF6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuakeWaveGeneratorTest", "QuakeWaveGeneratorTest\QuakeWaveGeneratorTest.csproj", "{D94C3395-EDFE-4E3F-ADA6-795BDEEE8A53}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{4452CE84-1B13-46F4-8BFC-CF1086D4DDEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4452CE84-1B13-46F4-8BFC-CF1086D4DDEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4452CE84-1B13-46F4-8BFC-CF1086D4DDEC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4108F423-75BD-44A5-A1D2-8703AEE7CEF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4108F423-75BD-44A5-A1D2-8703AEE7CEF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4108F423-75BD-44A5-A1D2-8703AEE7CEF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4108F423-75BD-44A5-A1D2-8703AEE7CEF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D94C3395-EDFE-4E3F-ADA6-795BDEEE8A53}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D94C3395-EDFE-4E3F-ADA6-795BDEEE8A53}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D94C3395-EDFE-4E3F-ADA6-795BDEEE8A53}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D94C3395-EDFE-4E3F-ADA6-795BDEEE8A53}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
