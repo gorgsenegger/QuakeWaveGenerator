@@ -1,3 +1,5 @@
+![Quake Wave Generator Logo](img/QuakeWaveGenerator-121x121.png "Quake Wave Generator")
+
 # QuakeWaveGenerator
 
 ## Disclaimer
