@@ -5,6 +5,7 @@
 ## Disclaimer
 🔴**This is still work in progress, the path_corner entities are not done yet**🔴
 
+## What this is
 A Winforms application to automate the creation of multiple `func_train` "blocks", laid out in a horizontal grid where you can configure the number of "rows" and "columns". The blocks only move horizontally and, by timing the amplitudes of that movement, give the impression of a wave. The output of this program will be in the format as required by the Quake map file specifications, e.g.
 
 ```
@@ -57,3 +58,8 @@ You can configure (in Quake units):
 A Picture (or video...) says more than a thousand words:
 
 [Example video](QuakeWaveGenerator.mp4)
+
+# Issues
+As you can enter rows and columns (mostly) as you wish, the resulting number of `func_train` entities and linked `path_corner` quickly can get pretty high. With vanilla Quake you'll soon run into the `No free Edicts` error message, meaning that the maximum number of entities (512) was exceeded. Either pay attention to that limit and reduce your overall number of entities or use an engine (e.g. QuakeSpasm) that has a higher limit (8192) or is configurable.
+
+Another issue is that despite being configured in the right way, adjoining blocks with initially different positions in the wave cycle tend to synchronise over time. This needs more investigation though as so far it doesn't seem to behave in a reproducible manner.
