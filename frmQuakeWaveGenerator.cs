@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -55,6 +57,7 @@ namespace QuakeWaveGenerator
             txtOutput.Clear();
             btnCancel.Enabled = true;
             decimal percentagePerBlock = Convert.ToDecimal(100) / Convert.ToDecimal(nudNumRows.Value * nudNumColumns.Value);
+            int[] stepSequence = m_MapFileTool.StepSequence(Convert.ToInt32(nudNumSteps.Value), Convert.ToInt32(nudWaveHeightPerStep.Value));
             for (int row = 1; row <= nudNumRows.Value; row++)
             {
                 for (int column = 1; column <= nudNumColumns.Value; column++)
@@ -68,9 +71,10 @@ namespace QuakeWaveGenerator
                         return;
                     }
 
+                    int stepHeight = stepSequence[column % stepSequence.Length];
                     int percentage = Convert.ToInt32(percentagePerBlock * ((row - 1) * nudNumColumns.Value + column));
                     await Task.Run(() => UpdateProgressBar(percentage));
-                    await Task.Run(() => generateBlock(row, column));
+                    await Task.Run(() => generateBlock(row, column, stepHeight, stepSequence.Max()));
                 }
             }
 
@@ -82,7 +86,7 @@ namespace QuakeWaveGenerator
             prgGeneration.Invoke(new MethodInvoker(delegate { prgGeneration.Value = percentage; }));
         }
 
-        private void generateBlock(int row, int column)
+        private void generateBlock(int row, int column, int stepHeight, int amplitude)
         {
             int length = Convert.ToInt32(nudSizeInUnits.Value);
             int start_x = Convert.ToInt32(nudOffsetToRight.Value);
@@ -134,7 +138,7 @@ namespace QuakeWaveGenerator
             {
                 txtOutput.AppendText("{" + Environment.NewLine);
                 string baseTargetName = m_MapFileTool.GenerateBaseTargetName(row, column);
-                txtOutput.AppendText(m_MapFileTool.GenerateFuncTrainSettings(row, column, baseTargetName, chkSound.Checked));
+                txtOutput.AppendText(m_MapFileTool.GenerateFuncTrainSettings(baseTargetName, chkSound.Checked));
 
                 // Left face
                 txtOutput.AppendText(
@@ -183,19 +187,21 @@ namespace QuakeWaveGenerator
                         left_front_top_x, left_front_top_y, left_front_top_z,
                         right_back_top_x, right_back_top_y, right_back_top_z,
                         cmbTextureName.SelectedItem.ToString()));
+                txtOutput.AppendText("  }" + Environment.NewLine);
                 txtOutput.AppendText("}" + Environment.NewLine);
 
-                // TODO Generate path_corners: init, top, bottom
-                // TODO: We need to vary the z coordinates for each init path_corner (based on direction of wave and number of steps)
+                // For the init path_corner entities, we use the amplitude plus the varying step height.
                 txtOutput.AppendText(
                   m_MapFileTool.GeneratePathCorner(
-                        baseTargetName, PathCornerType.Init, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z));
+                        baseTargetName, PathCornerType.Init, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z + amplitude + stepHeight));
+
+                // For the top path_corner entities, we use the amplitude
+                txtOutput.AppendText(
+                    m_MapFileTool.GeneratePathCorner(
+                        baseTargetName, PathCornerType.Top, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z + amplitude));
                 txtOutput.AppendText(
                     m_MapFileTool.GeneratePathCorner(
                         baseTargetName, PathCornerType.Bottom, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z));
-                txtOutput.AppendText(
-                    m_MapFileTool.GeneratePathCorner(
-                        baseTargetName, PathCornerType.Top, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z));
             }));
         }
 
@@ -218,28 +224,23 @@ namespace QuakeWaveGenerator
             UpdateAmplitude();
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void nudNumSteps_ValueChanged(object sender, EventArgs e)
         {
             UpdateAmplitude();
         }
 
         private void UpdateAmplitude()
         {
-            if (nudNumSteps.Value > Math.Max(nudNumRows.Value, nudNumColumns.Value))
+            int[] stepSequence = m_MapFileTool.StepSequence(Convert.ToInt32(nudNumSteps.Value), Convert.ToInt32(nudWaveHeightPerStep.Value));
+            if (stepSequence.Length > nudNumColumns.Value)
             {
-                LogMessage("Num steps for wave must not be greater than the number of rows or columns!", Severity.Warning);
+                LogMessage("Num steps in step sequence must not be greater than the number of rows or columns!", Severity.Warning);
                 nudNumSteps.Value = Math.Max(nudNumRows.Value, nudNumColumns.Value);
                 return;
             }
 
             txtTotalAmplitude.Text = Convert.ToString(nudWaveHeightPerStep.Value * nudNumSteps.Value);
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < nudNumSteps.Value; i++)
-            {
-                stringBuilder.Append(i * nudWaveHeightPerStep.Value + " ");
-            }
-
-            txtStepHeights.Text = stringBuilder.ToString();
+            txtStepHeights.Text = string.Join(", ", stepSequence);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

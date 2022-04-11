@@ -129,7 +129,7 @@
             this.nudOffsetToRight.Location = new System.Drawing.Point(232, 33);
             this.nudOffsetToRight.Name = "nudOffsetToRight";
             this.nudOffsetToRight.Size = new System.Drawing.Size(64, 20);
-            this.nudOffsetToRight.TabIndex = 5;
+            this.nudOffsetToRight.TabIndex = 3;
             // 
             // lblOffsetToFront
             // 
@@ -145,7 +145,7 @@
             this.nudOffsetToFront.Location = new System.Drawing.Point(409, 33);
             this.nudOffsetToFront.Name = "nudOffsetToFront";
             this.nudOffsetToFront.Size = new System.Drawing.Size(64, 20);
-            this.nudOffsetToFront.TabIndex = 7;
+            this.nudOffsetToFront.TabIndex = 4;
             // 
             // lblOffsetToTop
             // 
@@ -161,7 +161,7 @@
             this.nudOffsetToTop.Location = new System.Drawing.Point(567, 33);
             this.nudOffsetToTop.Name = "nudOffsetToTop";
             this.nudOffsetToTop.Size = new System.Drawing.Size(64, 20);
-            this.nudOffsetToTop.TabIndex = 9;
+            this.nudOffsetToTop.TabIndex = 5;
             // 
             // cmbTextureName
             // 
@@ -171,7 +171,7 @@
             this.cmbTextureName.Location = new System.Drawing.Point(567, 6);
             this.cmbTextureName.Name = "cmbTextureName";
             this.cmbTextureName.Size = new System.Drawing.Size(139, 21);
-            this.cmbTextureName.TabIndex = 10;
+            this.cmbTextureName.TabIndex = 2;
             // 
             // lblNumberOfRows
             // 
@@ -197,7 +197,7 @@
             0});
             this.nudNumRows.Name = "nudNumRows";
             this.nudNumRows.Size = new System.Drawing.Size(64, 20);
-            this.nudNumRows.TabIndex = 12;
+            this.nudNumRows.TabIndex = 9;
             this.nudNumRows.Value = new decimal(new int[] {
             1,
             0,
@@ -230,7 +230,7 @@
             0});
             this.nudNumColumns.Name = "nudNumColumns";
             this.nudNumColumns.Size = new System.Drawing.Size(64, 20);
-            this.nudNumColumns.TabIndex = 14;
+            this.nudNumColumns.TabIndex = 10;
             this.nudNumColumns.Value = new decimal(new int[] {
             1,
             0,
@@ -297,8 +297,8 @@
             0,
             0});
             this.nudSpacing.Name = "nudSpacing";
-            this.nudSpacing.Size = new System.Drawing.Size(66, 20);
-            this.nudSpacing.TabIndex = 21;
+            this.nudSpacing.Size = new System.Drawing.Size(64, 20);
+            this.nudSpacing.TabIndex = 1;
             this.nudSpacing.Value = new decimal(new int[] {
             4,
             0,
@@ -333,7 +333,7 @@
             0});
             this.nudDamage.Name = "nudDamage";
             this.nudDamage.Size = new System.Drawing.Size(64, 20);
-            this.nudDamage.TabIndex = 24;
+            this.nudDamage.TabIndex = 6;
             // 
             // nudSpeed
             // 
@@ -350,7 +350,7 @@
             0});
             this.nudSpeed.Name = "nudSpeed";
             this.nudSpeed.Size = new System.Drawing.Size(64, 20);
-            this.nudSpeed.TabIndex = 25;
+            this.nudSpeed.TabIndex = 7;
             this.nudSpeed.Value = new decimal(new int[] {
             32,
             0,
@@ -372,7 +372,7 @@
             this.chkSound.Location = new System.Drawing.Point(567, 61);
             this.chkSound.Name = "chkSound";
             this.chkSound.Size = new System.Drawing.Size(15, 14);
-            this.chkSound.TabIndex = 27;
+            this.chkSound.TabIndex = 8;
             this.chkSound.UseVisualStyleBackColor = true;
             // 
             // picLogo
@@ -417,7 +417,7 @@
             0});
             this.nudWaveHeightPerStep.Name = "nudWaveHeightPerStep";
             this.nudWaveHeightPerStep.Size = new System.Drawing.Size(64, 20);
-            this.nudWaveHeightPerStep.TabIndex = 31;
+            this.nudWaveHeightPerStep.TabIndex = 11;
             this.nudWaveHeightPerStep.Value = new decimal(new int[] {
             1,
             0,
@@ -450,13 +450,13 @@
             0});
             this.nudNumSteps.Name = "nudNumSteps";
             this.nudNumSteps.Size = new System.Drawing.Size(64, 20);
-            this.nudNumSteps.TabIndex = 33;
+            this.nudNumSteps.TabIndex = 12;
             this.nudNumSteps.Value = new decimal(new int[] {
             1,
             0,
             0,
             0});
-            this.nudNumSteps.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            this.nudNumSteps.ValueChanged += new System.EventHandler(this.nudNumSteps_ValueChanged);
             this.nudNumSteps.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nudNumSteps_KeyUp);
             // 
             // lblTotalWaveAmplitude
@@ -548,9 +548,9 @@
             this.lblStepHeights.AutoSize = true;
             this.lblStepHeights.Location = new System.Drawing.Point(139, 140);
             this.lblStepHeights.Name = "lblStepHeights";
-            this.lblStepHeights.Size = new System.Drawing.Size(69, 13);
+            this.lblStepHeights.Size = new System.Drawing.Size(82, 13);
             this.lblStepHeights.TabIndex = 39;
-            this.lblStepHeights.Text = "Step heights:";
+            this.lblStepHeights.Text = "Step sequence:";
             // 
             // txtStepHeights
             // 

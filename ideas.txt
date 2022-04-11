@@ -2,3 +2,4 @@
 - Wave amplitude (check with number of rows and/or columns)
 - Wave direction (horizontal, vertical, diagonal)
 - Multi-lingual
+- Fix int/decimal stuff
