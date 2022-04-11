@@ -45,6 +45,7 @@ namespace QuakeWaveGenerator
         /// <param name="y">The y coordinate.</param>
         /// <param name="z">The z coordinate.</param>
         /// <returns>The code lines for the path_corner entity.</returns>
+        /// <exception cref="ArgumentException">Thrown when an invalid value for PathCornerType is passed.</exception>
         public string GeneratePathCorner(string baseTargetName, PathCornerType pathCornerType, int x, int y, int z)
         {
             string addTypeString = string.Empty;
@@ -64,7 +65,7 @@ namespace QuakeWaveGenerator
                     addTargetNameString = "_bottom";
                     break;
                 default:
-                    break;
+                    throw new ArgumentException("Invalid value passed", "pathCornerType");
             }
 
             return string.Format(@"{{" + Environment.NewLine +
@@ -93,7 +94,7 @@ namespace QuakeWaveGenerator
         public string GenerateFace(int x1, int y1, int z1, int x2, int y2, int z2, int x3, int y3, int z3, string textureName)
         {
             string texture = textureName + " 0 0 0 1 1";
-            return string.Format("    ({0} {1} {2}) ({3} {4} {5}) ({6} {7} {8}) {9}",
+            return string.Format("    ({0:D4} {1:D4} {2:D4}) ({3:D4} {4:D4} {5:D4}) ({6:D4} {7:D4} {8:D4}) {9}",
                     x1, y1, z1, x2, y2, z2, x3, y3, z3, texture) + Environment.NewLine;
         }
 
