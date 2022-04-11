@@ -91,6 +91,7 @@
     <Content Include="img\QuakeWaveGenerator-16x16.png" />
     <Content Include="img\QuakeWaveGenerator-48x52.png" />
     <Content Include="img\QuakeWaveGenerator-84x90.png" />
+    <Content Include="img\QuakeWaveGenerator-Multi-Resolution.ico" />
     <Content Include="img\QuakeWaveGenerator-NoShadow.ico" />
     <Content Include="img\QuakeWaveGenerator-NoShadow.png" />
     <Content Include="img\QuakeWaveGenerator.ico" />

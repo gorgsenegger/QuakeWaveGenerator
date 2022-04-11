@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -214,23 +215,31 @@ namespace QuakeWaveGenerator
 
         private void nudWaveHeightPerStep_ValueChanged(object sender, EventArgs e)
         {
-            UpdateTotalAmplitude();
+            UpdateAmplitude();
         }
 
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
-            UpdateTotalAmplitude();
+            UpdateAmplitude();
         }
 
-        private void UpdateTotalAmplitude()
+        private void UpdateAmplitude()
         {
             if (nudNumSteps.Value > Math.Max(nudNumRows.Value, nudNumColumns.Value))
             {
                 LogMessage("Num steps for wave must not be greater than the number of rows or columns!", Severity.Warning);
+                nudNumSteps.Value = Math.Max(nudNumRows.Value, nudNumColumns.Value);
                 return;
             }
 
             txtTotalAmplitude.Text = Convert.ToString(nudWaveHeightPerStep.Value * nudNumSteps.Value);
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < nudNumSteps.Value; i++)
+            {
+                stringBuilder.Append(i * nudWaveHeightPerStep.Value + " ");
+            }
+
+            txtStepHeights.Text = stringBuilder.ToString();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
@@ -257,6 +266,26 @@ namespace QuakeWaveGenerator
         {
             txtOutput.Clear();
             prgGeneration.Value = 0;
+        }
+
+        private void nudNumRows_KeyUp(object sender, KeyEventArgs e)
+        {
+            UpdateSumBlocks();
+        }
+
+        private void nudNumColumns_KeyUp(object sender, KeyEventArgs e)
+        {
+            UpdateSumBlocks();
+        }
+
+        private void nudWaveHeightPerStep_KeyUp(object sender, KeyEventArgs e)
+        {
+            UpdateAmplitude();
+        }
+
+        private void nudNumSteps_KeyUp(object sender, KeyEventArgs e)
+        {
+            UpdateAmplitude();
         }
     }
 }

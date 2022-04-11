@@ -64,10 +64,12 @@
             this.lblTotalWaveAmplitude = new System.Windows.Forms.Label();
             this.txtTotalAmplitude = new System.Windows.Forms.TextBox();
             this.tlpTextBoxes = new System.Windows.Forms.TableLayoutPanel();
-            this.btnCancel = new System.Windows.Forms.Button();
             this.txtMessages = new System.Windows.Forms.TextBox();
-            this.btnCopyGeneratedCode = new System.Windows.Forms.Button();
             this.btnClearGeneratedText = new System.Windows.Forms.Button();
+            this.btnCopyGeneratedCode = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+            this.lblStepHeights = new System.Windows.Forms.Label();
+            this.txtStepHeights = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.nudSizeInUnits)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffsetToRight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudOffsetToFront)).BeginInit();
@@ -202,6 +204,7 @@
             0,
             0});
             this.nudNumRows.ValueChanged += new System.EventHandler(this.nudNumRows_ValueChanged);
+            this.nudNumRows.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nudNumRows_KeyUp);
             // 
             // lblNumberOfColumns
             // 
@@ -234,6 +237,7 @@
             0,
             0});
             this.nudNumColumns.ValueChanged += new System.EventHandler(this.nudNumColumns_ValueChanged);
+            this.nudNumColumns.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nudNumColumns_KeyUp);
             // 
             // txtSumBlocks
             // 
@@ -262,7 +266,7 @@
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtOutput.Size = new System.Drawing.Size(877, 210);
+            this.txtOutput.Size = new System.Drawing.Size(704, 138);
             this.txtOutput.TabIndex = 17;
             // 
             // btnGenerate
@@ -384,7 +388,7 @@
             // 
             this.prgGeneration.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.prgGeneration.Location = new System.Drawing.Point(12, 162);
+            this.prgGeneration.Location = new System.Drawing.Point(12, 163);
             this.prgGeneration.Name = "prgGeneration";
             this.prgGeneration.Size = new System.Drawing.Size(710, 23);
             this.prgGeneration.TabIndex = 29;
@@ -420,6 +424,7 @@
             0,
             0});
             this.nudWaveHeightPerStep.ValueChanged += new System.EventHandler(this.nudWaveHeightPerStep_ValueChanged);
+            this.nudWaveHeightPerStep.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nudWaveHeightPerStep_KeyUp);
             // 
             // lblNumSteps
             // 
@@ -452,6 +457,7 @@
             0,
             0});
             this.nudNumSteps.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            this.nudNumSteps.KeyUp += new System.Windows.Forms.KeyEventHandler(this.nudNumSteps_KeyUp);
             // 
             // lblTotalWaveAmplitude
             // 
@@ -483,14 +489,48 @@
             this.tlpTextBoxes.Controls.Add(this.txtOutput, 0, 0);
             this.tlpTextBoxes.Controls.Add(this.btnClearGeneratedText, 1, 1);
             this.tlpTextBoxes.Controls.Add(this.btnCopyGeneratedCode, 0, 1);
-            this.tlpTextBoxes.Location = new System.Drawing.Point(12, 191);
+            this.tlpTextBoxes.Location = new System.Drawing.Point(12, 192);
             this.tlpTextBoxes.Name = "tlpTextBoxes";
             this.tlpTextBoxes.RowCount = 3;
             this.tlpTextBoxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpTextBoxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tlpTextBoxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tlpTextBoxes.Size = new System.Drawing.Size(710, 258);
+            this.tlpTextBoxes.Size = new System.Drawing.Size(710, 257);
             this.tlpTextBoxes.TabIndex = 37;
+            // 
+            // txtMessages
+            // 
+            this.tlpTextBoxes.SetColumnSpan(this.txtMessages, 2);
+            this.txtMessages.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMessages.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMessages.Location = new System.Drawing.Point(3, 180);
+            this.txtMessages.Multiline = true;
+            this.txtMessages.Name = "txtMessages";
+            this.txtMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtMessages.Size = new System.Drawing.Size(704, 74);
+            this.txtMessages.TabIndex = 37;
+            // 
+            // btnClearGeneratedText
+            // 
+            this.btnClearGeneratedText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClearGeneratedText.Location = new System.Drawing.Point(613, 151);
+            this.btnClearGeneratedText.Name = "btnClearGeneratedText";
+            this.btnClearGeneratedText.Size = new System.Drawing.Size(94, 23);
+            this.btnClearGeneratedText.TabIndex = 39;
+            this.btnClearGeneratedText.Text = "Clear";
+            this.btnClearGeneratedText.UseVisualStyleBackColor = true;
+            this.btnClearGeneratedText.Click += new System.EventHandler(this.btnClearGeneratedText_Click);
+            // 
+            // btnCopyGeneratedCode
+            // 
+            this.btnCopyGeneratedCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopyGeneratedCode.Location = new System.Drawing.Point(507, 151);
+            this.btnCopyGeneratedCode.Name = "btnCopyGeneratedCode";
+            this.btnCopyGeneratedCode.Size = new System.Drawing.Size(100, 23);
+            this.btnCopyGeneratedCode.TabIndex = 38;
+            this.btnCopyGeneratedCode.Text = "Copy to Clipboard";
+            this.btnCopyGeneratedCode.UseVisualStyleBackColor = true;
+            this.btnCopyGeneratedCode.Click += new System.EventHandler(this.btnCopyGeneratedCode_Click);
             // 
             // btnCancel
             // 
@@ -503,45 +543,31 @@
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // txtMessages
+            // lblStepHeights
             // 
-            this.tlpTextBoxes.SetColumnSpan(this.txtMessages, 2);
-            this.txtMessages.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMessages.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMessages.Location = new System.Drawing.Point(3, 259);
-            this.txtMessages.Multiline = true;
-            this.txtMessages.Name = "txtMessages";
-            this.txtMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMessages.Size = new System.Drawing.Size(877, 74);
-            this.txtMessages.TabIndex = 37;
+            this.lblStepHeights.AutoSize = true;
+            this.lblStepHeights.Location = new System.Drawing.Point(139, 140);
+            this.lblStepHeights.Name = "lblStepHeights";
+            this.lblStepHeights.Size = new System.Drawing.Size(69, 13);
+            this.lblStepHeights.TabIndex = 39;
+            this.lblStepHeights.Text = "Step heights:";
             // 
-            // btnCopyGeneratedCode
+            // txtStepHeights
             // 
-            this.btnCopyGeneratedCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCopyGeneratedCode.Location = new System.Drawing.Point(717, 237);
-            this.btnCopyGeneratedCode.Name = "btnCopyGeneratedCode";
-            this.btnCopyGeneratedCode.Size = new System.Drawing.Size(100, 23);
-            this.btnCopyGeneratedCode.TabIndex = 38;
-            this.btnCopyGeneratedCode.Text = "Copy to Clipboard";
-            this.btnCopyGeneratedCode.UseVisualStyleBackColor = true;
-            this.btnCopyGeneratedCode.Click += new System.EventHandler(this.btnCopyGeneratedCode_Click);
-            // 
-            // btnClearGeneratedText
-            // 
-            this.btnClearGeneratedText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearGeneratedText.Location = new System.Drawing.Point(884, 230);
-            this.btnClearGeneratedText.Name = "btnClearGeneratedText";
-            this.btnClearGeneratedText.Size = new System.Drawing.Size(100, 23);
-            this.btnClearGeneratedText.TabIndex = 39;
-            this.btnClearGeneratedText.Text = "Clear";
-            this.btnClearGeneratedText.UseVisualStyleBackColor = true;
-            this.btnClearGeneratedText.Click += new System.EventHandler(this.btnClearGeneratedText_Click);
+            this.txtStepHeights.Location = new System.Drawing.Point(232, 137);
+            this.txtStepHeights.Name = "txtStepHeights";
+            this.txtStepHeights.ReadOnly = true;
+            this.txtStepHeights.Size = new System.Drawing.Size(241, 20);
+            this.txtStepHeights.TabIndex = 40;
+            this.txtStepHeights.Text = "1";
             // 
             // frmQuakeWaveGenerator
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 461);
+            this.Controls.Add(this.txtStepHeights);
+            this.Controls.Add(this.lblStepHeights);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.tlpTextBoxes);
             this.Controls.Add(this.lblTotalWaveAmplitude);
@@ -642,6 +668,8 @@
         private System.Windows.Forms.TextBox txtMessages;
         private System.Windows.Forms.Button btnCopyGeneratedCode;
         private System.Windows.Forms.Button btnClearGeneratedText;
+        private System.Windows.Forms.Label lblStepHeights;
+        private System.Windows.Forms.TextBox txtStepHeights;
     }
 }
 
