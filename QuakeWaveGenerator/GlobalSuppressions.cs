@@ -19,3 +19,5 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:QuakeWaveGenerator.frmQuakeWaveGenerator.nudNumSteps_ValueChanged(System.Object,System.EventArgs)")]
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:QuakeWaveGenerator.frmQuakeWaveGenerator.nudWaveHeightPerStep_KeyUp(System.Object,System.Windows.Forms.KeyEventArgs)")]
 [assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:QuakeWaveGenerator.frmQuakeWaveGenerator.nudWaveHeightPerStep_ValueChanged(System.Object,System.EventArgs)")]
+[assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "member", Target = "~M:QuakeWaveGenerator.frmQuakeWaveGenerator.btnPreview_Click(System.Object,System.EventArgs)")]
+[assembly: SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>", Scope = "type", Target = "~T:QuakeWaveGenerator.frmQuakeWaveGenerator")]

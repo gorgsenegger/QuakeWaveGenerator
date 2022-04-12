@@ -79,7 +79,13 @@ namespace QuakeWaveGenerator
                         return;
                     }
 
-                    int stepHeight = stepSequence[column % stepSequence.Length];
+                    int offsetPerRow = 0;
+                    if (chkDiagonalWave.Checked)
+                    {
+                        offsetPerRow = (row - 1) + column;
+                    }
+
+                    int stepHeight = stepSequence[(offsetPerRow + column) % stepSequence.Length];
                     int percentage = Convert.ToInt32(percentagePerBlock * ((row - 1) * nudNumColumns.Value + column));
                     await Task.Run(() => UpdateProgressBar(percentage));
                     await Task.Run(() => generateBlock(row, column, stepHeight, stepSequence.Max()));
@@ -294,6 +300,30 @@ namespace QuakeWaveGenerator
         private void nudNumSteps_KeyUp(object sender, KeyEventArgs e)
         {
             UpdateAmplitude();
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            int[,] previewArray = new int[Convert.ToInt32(nudNumRows.Value), Convert.ToInt32(nudNumColumns.Value)];
+            int[] stepSequence = m_MapFileTool.StepSequence(Convert.ToInt32(nudNumSteps.Value), Convert.ToInt32(nudWaveHeightPerStep.Value));
+            for (int column = 1; column <= nudNumColumns.Value; column++)
+            {
+                for (int row = 1; row <= nudNumRows.Value; row++)
+                {
+                    int offsetPerRow = 0;
+                    if (chkDiagonalWave.Checked)
+                    {
+                        offsetPerRow = (row - 1) + column;
+                    }
+
+                    int stepHeight = stepSequence[(offsetPerRow + column) % stepSequence.Length];
+                    previewArray[row - 1, column - 1] = stepHeight;
+                }
+            }
+
+            frmPreview frmPreview = new frmPreview();
+            frmPreview.SetArrayAndSequence(previewArray, stepSequence);
+            frmPreview.ShowDialog();
         }
     }
 }
