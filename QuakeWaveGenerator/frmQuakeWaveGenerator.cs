@@ -1,4 +1,6 @@
-﻿using System;
+﻿using QuakeWaveGenerator.entities;
+using QuakeWaveGenerator.utility;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -108,114 +110,38 @@ namespace QuakeWaveGenerator
             int start_z = Convert.ToInt32(nudOffsetToTop.Value);
             int spacing = Convert.ToInt32(nudSpacing.Value);
 
-            // LEFT_FRONT_BOTTOM
-            int left_front_bottom_x = ((column - 1) * length) + ((column - 1) * spacing) + start_x;
-            int left_front_bottom_y = ((row - 1) * length) + ((row - 1) * spacing) + start_y;
-            int left_front_bottom_z = start_z;
-
-            // RIGHT_FRONT_BOTTOM
-            int right_front_bottom_x = (column * length) + ((column - 1) * spacing) + start_x;
-            int right_front_bottom_y = ((row - 1) * length) + ((row - 1) * spacing) + start_y;
-            int right_front_bottom_z = start_z;
-
-            // LEFT_BACK_BOTTOM
-            int left_back_bottom_x = ((column - 1) * length) + ((column - 1) * spacing) + start_x;
-            int left_back_bottom_y = (row * length) + ((row - 1) * spacing) + start_y;
-            int left_back_bottom_z = start_z;
-
-            // RIGHT_BACK_BOTTOM
-            int right_back_bottom_x = (column * length) + ((column - 1) * spacing) + start_x;
-            int right_back_bottom_y = (row * length) + ((row - 1) * spacing) + start_y;
-            int right_back_bottom_z = start_z;
-
-            // LEFT_FRONT_TOP
-            int left_front_top_x = ((column - 1) * length) + ((column - 1) * spacing) + start_x;
-            int left_front_top_y = ((row - 1) * length) + ((row - 1) * spacing) + start_y;
-            int left_front_top_z = start_z + length;
-
-            // RIGHT_FRONT_TOP
-            int right_front_top_x = (column * length) + ((column - 1) * spacing) + start_x;
-            int right_front_top_y = ((row - 1) * length) + ((row - 1) * spacing) + start_y;
-            int right_front_top_z = start_z + length;
-
-            // LEFT_BACK_TOP
-            int left_back_top_x = ((column - 1) * length) + ((column - 1) * spacing) + start_x;
-            int left_back_top_y = (row * length) + ((row - 1) * spacing) + start_y;
-            int left_back_top_z = start_z + length;
-
-            // RIGHT_BACK_TOP
-            int right_back_top_x = (column * length) + ((column - 1) * spacing) + start_x;
-            int right_back_top_y = (row * length) + ((row - 1) * spacing) + start_y;
-            int right_back_top_z = start_z + length;
-
             txtOutput.Invoke(new MethodInvoker(delegate
             {
-                txtOutput.AppendText("{" + Environment.NewLine);
                 string baseTargetName = m_MapFileTool.GenerateBaseTargetName(row, column);
-                txtOutput.AppendText(m_MapFileTool.GenerateFuncTrainSettings(baseTargetName, chkSound.Checked));
 
-                // Left face
-                txtOutput.AppendText(
-                 m_MapFileTool.GenerateFace(
-                        left_front_top_x, left_front_top_y, left_front_top_z,
-                        left_front_bottom_x, left_front_bottom_y, left_front_bottom_z,
-                        left_back_top_x, left_back_top_y, left_back_top_z,
-                        cmbTextureName.SelectedItem.ToString()));
+                func_train func_train =
+                    new func_train(row, column, length, start_x, start_y, start_z,
+                        spacing, baseTargetName, chkSound.Checked, cmbTextureName.SelectedItem.ToString());
+                txtOutput.AppendText(func_train.ToString());
 
-                // Right face
-                txtOutput.AppendText(
-                    m_MapFileTool.GenerateFace(
-                        right_back_top_x, right_back_top_y, right_back_top_z,
-                        right_back_bottom_x, right_back_bottom_y, right_back_bottom_z,
-                        right_front_top_x, right_front_top_y, right_front_top_z,
-                        cmbTextureName.SelectedItem.ToString()));
-
-                // Front face
-                txtOutput.AppendText(
-                    m_MapFileTool.GenerateFace(
-                        right_front_top_x, right_front_top_y, right_front_top_z,
-                        right_front_bottom_x, right_front_bottom_y, right_front_bottom_z,
-                        left_front_top_x, left_front_top_y, left_front_top_z,
-                        cmbTextureName.SelectedItem.ToString()));
-
-                // Back face
-                txtOutput.AppendText(
-                    m_MapFileTool.GenerateFace(
-                        left_back_top_x, left_back_top_y, left_back_top_z,
-                        left_back_bottom_x, left_back_bottom_y, left_back_bottom_z,
-                        right_back_top_x, right_back_top_y, right_back_top_z,
-                        cmbTextureName.SelectedItem.ToString()));
-
-                // Bottom face
-                txtOutput.AppendText(
-                    m_MapFileTool.GenerateFace(
-                        left_back_bottom_x, left_back_bottom_y, left_back_bottom_z,
-                        left_front_bottom_x, left_front_bottom_y, left_front_bottom_z,
-                        right_back_bottom_x, right_back_bottom_y, right_back_bottom_z,
-                        cmbTextureName.SelectedItem.ToString()));
-
-                // Top face
-                txtOutput.AppendText(
-                    m_MapFileTool.GenerateFace(
-                        right_front_top_x, right_front_top_y, right_front_top_z,
-                        left_front_top_x, left_front_top_y, left_front_top_z,
-                        right_back_top_x, right_back_top_y, right_back_top_z,
-                        cmbTextureName.SelectedItem.ToString()));
-                txtOutput.AppendText("  }" + Environment.NewLine);
-                txtOutput.AppendText("}" + Environment.NewLine);
+                CubeVerticesCalculator cubeVerticesCalculator = 
+                    new CubeVerticesCalculator(row, column, length, spacing, start_x, start_y, start_z);
 
                 // For the init path_corner entities, we use the amplitude plus the varying step height.
-                txtOutput.AppendText(
-                  m_MapFileTool.GeneratePathCorner(
-                        baseTargetName, PathCornerType.Init, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z + amplitude + stepHeight));
+                path_corner path_corner = new path_corner(baseTargetName, PathCornerType.Init,
+                    cubeVerticesCalculator.LeftFrontBottom_X,
+                    cubeVerticesCalculator.LeftFrontBottom_Y,
+                    cubeVerticesCalculator.LeftFrontBottom_Z + amplitude + stepHeight);
+                txtOutput.AppendText(path_corner.ToString());
 
-                // For the top path_corner entities, we use the amplitude
-                txtOutput.AppendText(
-                    m_MapFileTool.GeneratePathCorner(
-                        baseTargetName, PathCornerType.Top, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z + amplitude));
-                txtOutput.AppendText(
-                    m_MapFileTool.GeneratePathCorner(
-                        baseTargetName, PathCornerType.Bottom, left_front_bottom_x, left_front_bottom_y, left_front_bottom_z));
+                // For the top path_corner entities, we use the amplitude as height.
+                path_corner = new path_corner(baseTargetName, PathCornerType.Top,
+                    cubeVerticesCalculator.LeftFrontBottom_X,
+                    cubeVerticesCalculator.LeftFrontBottom_Y,
+                    cubeVerticesCalculator.LeftFrontBottom_Z + amplitude);
+                txtOutput.AppendText(path_corner.ToString());
+
+                // The bottom path_corner entities we always leave the height as it is .
+                path_corner = new path_corner(baseTargetName, PathCornerType.Bottom,
+                    cubeVerticesCalculator.LeftFrontBottom_X,
+                    cubeVerticesCalculator.LeftFrontBottom_Y,
+                    cubeVerticesCalculator.LeftFrontBottom_Z);
+                txtOutput.AppendText(path_corner.ToString());
             }));
         }
 
@@ -247,8 +173,8 @@ namespace QuakeWaveGenerator
             int[] stepSequence = m_MapFileTool.StepSequence(Convert.ToInt32(nudNumSteps.Value), Convert.ToInt32(nudWaveHeightPerStep.Value));
             if (stepSequence.Length > nudNumColumns.Value)
             {
-                LogMessage("Num steps in step sequence must not be greater than the number of rows or columns!", Severity.Warning);
-                nudNumSteps.Value = Math.Max(nudNumRows.Value, nudNumColumns.Value);
+                LogMessage("Number of steps in step sequence must not be greater than the number of rows or columns!", Severity.Warning);
+                nudNumSteps.Value = Math.Min(nudNumRows.Value, nudNumColumns.Value);
                 return;
             }
 

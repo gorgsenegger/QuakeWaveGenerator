@@ -4,3 +4,4 @@
 - Multi-lingual
 - Fix int/decimal stuff
 - Classes for the entities
+- Add all the entities to a collection, then perform .ToString() on each while adding it to a StringBuilder and then set it as content for the text area

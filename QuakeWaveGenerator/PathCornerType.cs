@@ -1,4 +1,6 @@
-﻿namespace QuakeWaveGenerator
+﻿using System.ComponentModel;
+
+namespace QuakeWaveGenerator
 {
     /// <summary>
     /// The type of the path_corner.
@@ -10,6 +12,7 @@
         /// </summary>
         None = 0,
 
+        [Description("_init")]
         /// <summary>
         /// path_corner used for initialising the func_train.
         /// </summary>
