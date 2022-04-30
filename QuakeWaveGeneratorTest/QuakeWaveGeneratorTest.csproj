@@ -49,7 +49,10 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CubeVerticesCalculatorTest.cs" />
+    <Compile Include="func_trainTest.cs" />
     <Compile Include="MapFileToolTest.cs" />
+    <Compile Include="path_cornerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

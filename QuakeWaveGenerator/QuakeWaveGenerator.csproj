@@ -50,7 +50,8 @@
     <StartupObject>QuakeWaveGenerator.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>QuakeWaveGenerator-Multi-Resolution.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -67,6 +68,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="entities\func_train.cs" />
+    <Compile Include="entities\path_corner.cs" />
     <Compile Include="frmPreview.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,7 +83,9 @@
       <DependentUpon>frmQuakeWaveGenerator.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
-    <Compile Include="MapFileTool.cs" />
+    <Compile Include="utility\CubeVerticesCalculator.cs" />
+    <Compile Include="utility\EnumExtension.cs" />
+    <Compile Include="utility\MapFileTool.cs" />
     <Compile Include="PathCornerType.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -127,7 +132,6 @@
     <Content Include="img\QuakeWaveGenerator-NoShadow.png" />
     <Content Include="img\QuakeWaveGenerator.ico" />
     <Content Include="img\QuakeWaveGenerator.png" />
-    <Content Include="QuakeWaveGenerator-Multi-Resolution.ico" />
     <Content Include="QuakeWaveGenerator.mp4" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

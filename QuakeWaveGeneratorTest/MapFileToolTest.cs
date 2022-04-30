@@ -33,22 +33,6 @@ namespace QuakeWaveGeneratorTest
         }
 
         [TestMethod]
-        public void GenerateFuncTrainSettings_CalledWithName_ReturnsExpectedResult()
-        {
-            const string baseTargetName = "MyTarget";
-            string result = m_MapFileTool.GenerateFuncTrainSettings(baseTargetName, false);
-            Assert.IsTrue(result.Contains(baseTargetName + "_init"));
-        }
-
-        [TestMethod]
-        public void GenerateFuncTrainSettings_CalledWithNameAndMakeSoundFalse_ReturnsExpectedResult()
-        {
-            const string baseTargetName = "MyTarget";
-            string result = m_MapFileTool.GenerateFuncTrainSettings(baseTargetName, true);
-            Assert.IsTrue(result.Contains("\"sounds\" \"1\""));
-        }
-
-        [TestMethod]
         public void GenerateBaseTargetName_CalledWithRowAndColumN_ReturnsExpectedResult()
         {
             int row = 8;
@@ -56,6 +40,10 @@ namespace QuakeWaveGeneratorTest
             string result = m_MapFileTool.GenerateBaseTargetName(row, column);
             Assert.AreEqual("train_row-" + row.ToString("D3") + "_column-" + column.ToString("D3"), result);
         }
+
+
+
+
 
         [TestMethod, ExpectedException(typeof(ArgumentException))]
         public void GeneratePathCorner_CalledWithInvalidPathCornerTypeValue_ThrowsArgumentException()
