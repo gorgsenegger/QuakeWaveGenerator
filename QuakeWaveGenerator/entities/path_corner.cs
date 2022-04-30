@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuakeWaveGenerator.utility;
+using System;
 
 namespace QuakeWaveGenerator.entities
 {
@@ -36,36 +37,16 @@ namespace QuakeWaveGenerator.entities
         /// Returns the complete textual representation of the entity as needed for a map file.
         /// </summary>
         /// <returns>The string containing the entity.</returns>
-        /// <exception cref="ArgumentException"></exception>
         public override string ToString()
         {
-            string addTypeString;
-            string addTargetNameString;
-            switch (m_PathCornerType)
-            {
-                case PathCornerType.Init:
-                    addTypeString = "_init";
-                    addTargetNameString = "_bottom";
-                    break;
-                case PathCornerType.Bottom:
-                    addTypeString = "_bottom";
-                    addTargetNameString = "_top";
-                    break;
-                case PathCornerType.Top:
-                    addTypeString = "_top";
-                    addTargetNameString = "_bottom";
-                    break;
-                default:
-                    throw new ArgumentException("Invalid value passed", "pathCornerType");
-            }
-
+            string addTargetNameString = m_PathCornerType == PathCornerType.Bottom ? "_top" : "_bottom";
             return string.Format(@"{{" + Environment.NewLine +
                 @"  ""classname"" ""path_corner""" + Environment.NewLine +
                 @"  ""targetname"" ""{0}""" + Environment.NewLine +
                 @"  ""target"" ""{1}""" + Environment.NewLine +
                 @"  ""origin"" ""{2} {3} {4}""" + Environment.NewLine +
                 @"}}" + Environment.NewLine,
-                m_BaseTargetName + addTypeString, m_BaseTargetName + addTargetNameString, m_X, m_Y, m_Z);
+                m_BaseTargetName + m_PathCornerType.DisplayName(), m_BaseTargetName + addTargetNameString, m_X, m_Y, m_Z);
         }
     }
 }

@@ -1,10 +1,6 @@
-﻿using QuakeWaveGenerator.entities;
-using QuakeWaveGenerator.utility;
-using System;
-using System.Diagnostics;
+﻿using System;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace QuakeWaveGenerator
@@ -62,12 +58,13 @@ namespace QuakeWaveGenerator
             cmbTextureName.SelectedIndex = 0;
         }
 
-        private async void btnGenerate_Click(object sender, EventArgs e)
+        private void btnGenerate_Click(object sender, EventArgs e)
         {
             txtOutput.Clear();
             btnCancel.Enabled = true;
             decimal percentagePerBlock = Convert.ToDecimal(100) / Convert.ToDecimal(nudNumRows.Value * nudNumColumns.Value);
             int[] stepSequence = m_MapFileTool.StepSequence(Convert.ToInt32(nudNumSteps.Value), Convert.ToInt32(nudWaveHeightPerStep.Value));
+            StringBuilder stringBuilder = new StringBuilder();
             for (int row = 1; row <= nudNumRows.Value; row++)
             {
                 for (int column = 1; column <= nudNumColumns.Value; column++)
@@ -75,7 +72,6 @@ namespace QuakeWaveGenerator
                     if (m_Cancelled)
                     {
                         LogMessage("Generation cancelled.", Severity.Info);
-                        prgGeneration.Value = 0;
                         m_Cancelled = false;
                         btnCancel.Enabled = false;
                         return;
@@ -89,20 +85,18 @@ namespace QuakeWaveGenerator
 
                     int stepHeight = stepSequence[(offsetPerRow + column) % stepSequence.Length];
                     int percentage = Convert.ToInt32(percentagePerBlock * ((row - 1) * nudNumColumns.Value + column));
-                    await Task.Run(() => UpdateProgressBar(percentage));
-                    await Task.Run(() => generateBlock(row, column, stepHeight, stepSequence.Max()));
+                    stringBuilder.Append(generateBlock(row, column, stepHeight, stepSequence.Max()));
                 }
             }
 
+            txtOutput.Invoke(new MethodInvoker(delegate
+            {
+                txtOutput.AppendText(stringBuilder.ToString());
+            }));
             btnCancel.Enabled = false;
         }
 
-        private void UpdateProgressBar(int percentage)
-        {
-            prgGeneration.Invoke(new MethodInvoker(delegate { prgGeneration.Value = percentage; }));
-        }
-
-        private void generateBlock(int row, int column, int stepHeight, int amplitude)
+        private string generateBlock(int row, int column, int stepHeight, int amplitude)
         {
             int length = Convert.ToInt32(nudSizeInUnits.Value);
             int start_x = Convert.ToInt32(nudOffsetToRight.Value);
@@ -110,39 +104,8 @@ namespace QuakeWaveGenerator
             int start_z = Convert.ToInt32(nudOffsetToTop.Value);
             int spacing = Convert.ToInt32(nudSpacing.Value);
 
-            txtOutput.Invoke(new MethodInvoker(delegate
-            {
-                string baseTargetName = m_MapFileTool.GenerateBaseTargetName(row, column);
-
-                func_train func_train =
-                    new func_train(row, column, length, start_x, start_y, start_z,
-                        spacing, baseTargetName, chkSound.Checked, cmbTextureName.SelectedItem.ToString());
-                txtOutput.AppendText(func_train.ToString());
-
-                CubeVerticesCalculator cubeVerticesCalculator = 
-                    new CubeVerticesCalculator(row, column, length, spacing, start_x, start_y, start_z);
-
-                // For the init path_corner entities, we use the amplitude plus the varying step height.
-                path_corner path_corner = new path_corner(baseTargetName, PathCornerType.Init,
-                    cubeVerticesCalculator.LeftFrontBottom_X,
-                    cubeVerticesCalculator.LeftFrontBottom_Y,
-                    cubeVerticesCalculator.LeftFrontBottom_Z + amplitude + stepHeight);
-                txtOutput.AppendText(path_corner.ToString());
-
-                // For the top path_corner entities, we use the amplitude as height.
-                path_corner = new path_corner(baseTargetName, PathCornerType.Top,
-                    cubeVerticesCalculator.LeftFrontBottom_X,
-                    cubeVerticesCalculator.LeftFrontBottom_Y,
-                    cubeVerticesCalculator.LeftFrontBottom_Z + amplitude);
-                txtOutput.AppendText(path_corner.ToString());
-
-                // The bottom path_corner entities we always leave the height as it is .
-                path_corner = new path_corner(baseTargetName, PathCornerType.Bottom,
-                    cubeVerticesCalculator.LeftFrontBottom_X,
-                    cubeVerticesCalculator.LeftFrontBottom_Y,
-                    cubeVerticesCalculator.LeftFrontBottom_Z);
-                txtOutput.AppendText(path_corner.ToString());
-            }));
+            return m_MapFileTool.ConcatBlockParts(
+                row, column, length, start_x, start_y, start_z, spacing, chkSound.Checked, cmbTextureName.SelectedItem.ToString(), amplitude, stepHeight);
         }
 
         private void SelectAllText(object sender, EventArgs e)
@@ -205,7 +168,6 @@ namespace QuakeWaveGenerator
         private void btnClearGeneratedText_Click(object sender, EventArgs e)
         {
             txtOutput.Clear();
-            prgGeneration.Value = 0;
         }
 
         private void nudNumRows_KeyUp(object sender, KeyEventArgs e)

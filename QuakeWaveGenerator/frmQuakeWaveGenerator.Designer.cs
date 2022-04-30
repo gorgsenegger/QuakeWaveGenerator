@@ -57,7 +57,6 @@ namespace QuakeWaveGenerator
             this.lblSound = new System.Windows.Forms.Label();
             this.chkSound = new System.Windows.Forms.CheckBox();
             this.picLogo = new System.Windows.Forms.PictureBox();
-            this.prgGeneration = new System.Windows.Forms.ProgressBar();
             this.lblWaveHeightPerStep = new System.Windows.Forms.Label();
             this.nudWaveHeightPerStep = new System.Windows.Forms.NumericUpDown();
             this.lblNumSteps = new System.Windows.Forms.Label();
@@ -270,7 +269,7 @@ namespace QuakeWaveGenerator
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
             this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtOutput.Size = new System.Drawing.Size(704, 113);
+            this.txtOutput.Size = new System.Drawing.Size(704, 142);
             this.txtOutput.TabIndex = 17;
             // 
             // btnGenerate
@@ -388,15 +387,6 @@ namespace QuakeWaveGenerator
             this.picLogo.TabIndex = 28;
             this.picLogo.TabStop = false;
             // 
-            // prgGeneration
-            // 
-            this.prgGeneration.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.prgGeneration.Location = new System.Drawing.Point(15, 188);
-            this.prgGeneration.Name = "prgGeneration";
-            this.prgGeneration.Size = new System.Drawing.Size(710, 23);
-            this.prgGeneration.TabIndex = 29;
-            // 
             // lblWaveHeightPerStep
             // 
             this.lblWaveHeightPerStep.AutoSize = true;
@@ -493,13 +483,13 @@ namespace QuakeWaveGenerator
             this.tlpTextBoxes.Controls.Add(this.txtOutput, 0, 0);
             this.tlpTextBoxes.Controls.Add(this.btnClearGeneratedText, 1, 1);
             this.tlpTextBoxes.Controls.Add(this.btnCopyGeneratedCode, 0, 1);
-            this.tlpTextBoxes.Location = new System.Drawing.Point(12, 217);
+            this.tlpTextBoxes.Location = new System.Drawing.Point(12, 188);
             this.tlpTextBoxes.Name = "tlpTextBoxes";
             this.tlpTextBoxes.RowCount = 3;
             this.tlpTextBoxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpTextBoxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 33F));
             this.tlpTextBoxes.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 80F));
-            this.tlpTextBoxes.Size = new System.Drawing.Size(710, 232);
+            this.tlpTextBoxes.Size = new System.Drawing.Size(710, 261);
             this.tlpTextBoxes.TabIndex = 37;
             // 
             // txtMessages
@@ -507,7 +497,7 @@ namespace QuakeWaveGenerator
             this.tlpTextBoxes.SetColumnSpan(this.txtMessages, 2);
             this.txtMessages.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtMessages.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMessages.Location = new System.Drawing.Point(3, 155);
+            this.txtMessages.Location = new System.Drawing.Point(3, 184);
             this.txtMessages.Multiline = true;
             this.txtMessages.Name = "txtMessages";
             this.txtMessages.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -517,7 +507,7 @@ namespace QuakeWaveGenerator
             // btnClearGeneratedText
             // 
             this.btnClearGeneratedText.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnClearGeneratedText.Location = new System.Drawing.Point(613, 126);
+            this.btnClearGeneratedText.Location = new System.Drawing.Point(613, 155);
             this.btnClearGeneratedText.Name = "btnClearGeneratedText";
             this.btnClearGeneratedText.Size = new System.Drawing.Size(94, 23);
             this.btnClearGeneratedText.TabIndex = 39;
@@ -528,7 +518,7 @@ namespace QuakeWaveGenerator
             // btnCopyGeneratedCode
             // 
             this.btnCopyGeneratedCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCopyGeneratedCode.Location = new System.Drawing.Point(507, 126);
+            this.btnCopyGeneratedCode.Location = new System.Drawing.Point(507, 155);
             this.btnCopyGeneratedCode.Name = "btnCopyGeneratedCode";
             this.btnCopyGeneratedCode.Size = new System.Drawing.Size(100, 23);
             this.btnCopyGeneratedCode.TabIndex = 38;
@@ -611,7 +601,6 @@ namespace QuakeWaveGenerator
             this.Controls.Add(this.lblNumSteps);
             this.Controls.Add(this.nudWaveHeightPerStep);
             this.Controls.Add(this.lblWaveHeightPerStep);
-            this.Controls.Add(this.prgGeneration);
             this.Controls.Add(this.picLogo);
             this.Controls.Add(this.chkSound);
             this.Controls.Add(this.lblSound);
@@ -691,7 +680,6 @@ namespace QuakeWaveGenerator
         private System.Windows.Forms.Label lblSound;
         private System.Windows.Forms.CheckBox chkSound;
         private System.Windows.Forms.PictureBox picLogo;
-        private System.Windows.Forms.ProgressBar prgGeneration;
         private System.Windows.Forms.Label lblWaveHeightPerStep;
         private System.Windows.Forms.NumericUpDown nudWaveHeightPerStep;
         private System.Windows.Forms.Label lblNumSteps;

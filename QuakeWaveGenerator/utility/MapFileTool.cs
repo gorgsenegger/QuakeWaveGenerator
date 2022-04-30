@@ -1,4 +1,7 @@
-﻿using System;
+﻿using QuakeWaveGenerator.entities;
+using QuakeWaveGenerator.utility;
+using System;
+using System.Text;
 
 namespace QuakeWaveGenerator
 {
@@ -82,6 +85,57 @@ namespace QuakeWaveGenerator
             }
 
             return steps;
+        }
+
+        /// <summary>
+        /// Put all parts required for a block that moves up and down between two <see cref="path_corner"/> entitites together.
+        /// </summary>
+        /// <param name="row"></param>
+        /// <param name="column"></param>
+        /// <param name="length"></param>
+        /// <param name="start_x"></param>
+        /// <param name="start_y"></param>
+        /// <param name="start_z"></param>
+        /// <param name="spacing"></param>
+        /// <param name="makeSound"></param>
+        /// <param name="textureName"></param>
+        /// <param name="amplitude"></param>
+        /// <param name="stepHeight"></param>
+        /// <returns>The string for the map file.</returns>
+        public string ConcatBlockParts(int row, int column, int length, int start_x, int start_y, int start_z, int spacing, bool makeSound, string textureName, int amplitude, int stepHeight)
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            string baseTargetName = GenerateBaseTargetName(row, column);
+
+            func_train func_train =
+                new func_train(row, column, length, start_x, start_y, start_z,
+                    spacing, baseTargetName,makeSound, textureName);
+            stringBuilder.Append(func_train.ToString());
+
+            CubeVerticesCalculator cubeVerticesCalculator =
+                new CubeVerticesCalculator(row, column, length, spacing, start_x, start_y, start_z);
+
+            // For the init path_corner entities, we use the amplitude plus the varying step height.
+            path_corner path_corner = new path_corner(baseTargetName, PathCornerType.Init,
+                cubeVerticesCalculator.LeftFrontBottom_X,
+                cubeVerticesCalculator.LeftFrontBottom_Y,
+                cubeVerticesCalculator.LeftFrontBottom_Z + amplitude + stepHeight);
+            stringBuilder.Append(path_corner.ToString());
+
+            // For the top path_corner entities, we use the amplitude as height.
+            path_corner = new path_corner(baseTargetName, PathCornerType.Top,
+                cubeVerticesCalculator.LeftFrontBottom_X,
+                cubeVerticesCalculator.LeftFrontBottom_Y,
+                cubeVerticesCalculator.LeftFrontBottom_Z + amplitude);
+            stringBuilder.Append(path_corner.ToString());
+
+            // The bottom path_corner entities we always leave the height as it is .
+            path_corner = new path_corner(baseTargetName, PathCornerType.Bottom,
+                cubeVerticesCalculator.LeftFrontBottom_X,
+                cubeVerticesCalculator.LeftFrontBottom_Y,
+                cubeVerticesCalculator.LeftFrontBottom_Z);
+            stringBuilder.Append(path_corner.ToString());
+            return stringBuilder.ToString();
         }
     }
 }
