@@ -51,7 +51,7 @@ The output of this program will be in the format as required by the Quake map fi
 }
 ```
 
-# Options
+### Options
 You can configure (in Quake units):
 - the side length of the blocks that are created
 - the spacing between them
@@ -61,6 +61,9 @@ You can configure (in Quake units):
 - the number of steps between 0 and the amplitude
 - damage (if any), speed (of the `func_train` and sound (if any) -> these are the properties of the `func_train` entity
 - the texture to be used
+
+# How to use the output
+The generated output is in the Quake Map File format and can - as it is - be saved in a *.map* file, e.g. `mymap.map`. Please take into account that the output only includes the blocks and the corresponding entities, so you'll have to build some walls around them and also add some lights if you want to be able to see something :-).
 
 # Example
 A Picture (or video...) says more than a thousand words:
