@@ -50,8 +50,7 @@
     <StartupObject>QuakeWaveGenerator.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>img\QuakeWaveGenerator-Multi-Resolution.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -121,6 +120,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="data\textures.txt" />
     <Content Include="ideas.txt" />
     <Content Include="img\QuakeWaveGenerator-121x121.png" />
     <Content Include="img\QuakeWaveGenerator-16x16.ico" />

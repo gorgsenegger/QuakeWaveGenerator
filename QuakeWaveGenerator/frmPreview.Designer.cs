@@ -37,17 +37,20 @@ namespace QuakeWaveGenerator
             // 
             this.pnlDraw.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlDraw.Location = new System.Drawing.Point(0, 0);
+            this.pnlDraw.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.pnlDraw.Name = "pnlDraw";
-            this.pnlDraw.Size = new System.Drawing.Size(800, 450);
+            this.pnlDraw.Size = new System.Drawing.Size(1200, 692);
             this.pnlDraw.TabIndex = 0;
             // 
             // frmPreview
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1200, 692);
             this.Controls.Add(this.pnlDraw);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.MinimumSize = new System.Drawing.Size(400, 300);
             this.Name = "frmPreview";
             this.Text = "Preview";
             this.ResumeLayout(false);

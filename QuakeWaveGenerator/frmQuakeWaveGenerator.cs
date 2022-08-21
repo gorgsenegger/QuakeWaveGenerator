@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -20,6 +21,19 @@ namespace QuakeWaveGenerator
         {
             InitializeComponent();
             SetupNumericUpDownControls();
+
+            TextBoxColourFix();
+        }
+
+        /// <summary>
+        /// Due to buggy behaviour, changing the ForeColor in a readonly TextBox control
+        /// only works when the BackColor was changed once before.
+        /// </summary>
+        private void TextBoxColourFix()
+        {
+            Color color = txtStepHeights.BackColor;
+            txtStepHeights.BackColor = Color.Red;
+            txtStepHeights.BackColor = color;
         }
 
         /// <summary>
@@ -137,11 +151,15 @@ namespace QuakeWaveGenerator
             int[] stepSequence = m_MapFileTool.StepSequence(Convert.ToInt32(nudNumSteps.Value), Convert.ToInt32(nudWaveHeightPerStep.Value));
             if (stepSequence.Length > nudNumColumns.Value)
             {
-                LogMessage("Number of steps in step sequence must not be greater than the number of rows or columns!", Severity.Warning);
-                nudNumSteps.Value = Math.Min(nudNumRows.Value, nudNumColumns.Value);
+                LogMessage("Number of steps in step sequence (" + stepSequence.Length + ") must not be greater than the number of rows or columns!", Severity.Warning);
+                txtStepHeights.Text = string.Join(", ", stepSequence);
+                txtStepHeights.ForeColor = Color.Red;
                 return;
             }
 
+            // Instead of saving the original colour we take the one from a control whose colour
+            // is never changed.
+            txtStepHeights.ForeColor = txtSumBlocks.ForeColor;
             txtTotalAmplitude.Text = Convert.ToString(nudWaveHeightPerStep.Value * nudNumSteps.Value);
             txtStepHeights.Text = string.Join(", ", stepSequence);
         }
