@@ -6,7 +6,7 @@
 🔴**This is still work in progress**🔴
 
 ## What this is
-A Winforms application to automate the creation of multiple `func_train` "blocks", laid out in a horizontal grid where you can configure the number of "rows" and "columns". The blocks only move horizontally and, by timing the amplitudes of that movement, give the impression of a wave. 
+A Winforms application to automate the creation of multiple `func_train` "blocks", laid out in a horizontal grid where you can configure the number of "rows" and "columns". The blocks only move vertically and, by timing the amplitudes of that movement, give the impression of a wave. 
 
 ### What it looks like in a map file editor
 ![Editor Screenshot](QuakeWaveGenerator_func_train_path_corner_entities.png "The wave form of the path_corner entities is clearly visible")
