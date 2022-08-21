@@ -20,6 +20,7 @@ namespace QuakeWaveGenerator.entities
         private readonly string m_BackFace;
         private readonly string m_BottomFace;
         private readonly string m_TopFace;
+        private readonly int m_Speed;
 
         /// <summary>
         /// Initialises a new instance of the <see cref="func_train"/> class with its properties set according to the passed arguments.
@@ -34,11 +35,16 @@ namespace QuakeWaveGenerator.entities
         /// <param name="baseTargetName"></param>
         /// <param name="makeSound"></param>
         /// <param name="textureName"></param>
-        public func_train(int row, int column, int length, int start_x, int start_y, int start_z, int spacing, string baseTargetName, bool makeSound, string textureName)
+        /// <param name="speed"></param>
+        public func_train(
+            int row, int column, int length, 
+            int start_x, int start_y, int start_z, 
+            int spacing, string baseTargetName, bool makeSound, string textureName, int speed)
         {
             m_MakeSound = makeSound;
             m_TextureName = textureName;
             m_BaseTargetName = baseTargetName;
+            m_Speed = speed;
             m_CubeVerticesCalculator = new CubeVerticesCalculator(row, column, length, spacing, start_x, start_y, start_z);
             m_LeftFace = GenerateFace(
                         m_CubeVerticesCalculator.LeftFrontTop_X, m_CubeVerticesCalculator.LeftFrontTop_Y, m_CubeVerticesCalculator.LeftFrontTop_Z,
@@ -82,7 +88,7 @@ namespace QuakeWaveGenerator.entities
                 @"{{" + Environment.NewLine +
                 @"  ""classname"" ""func_train""" + Environment.NewLine +
                 @"  ""dmg"" ""0""" + Environment.NewLine +
-                @"  ""speed"" ""32""" + Environment.NewLine +
+                @"  ""speed"" """  + m_Speed + "" + Environment.NewLine +
                 @"  ""sounds"" ""{0}""" + Environment.NewLine +
                 @"  ""target"" ""{1}""" + Environment.NewLine +
                 @"  {{" + Environment.NewLine, Convert.ToInt32(m_MakeSound), m_BaseTargetName + "_init") +

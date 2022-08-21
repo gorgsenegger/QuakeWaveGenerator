@@ -103,9 +103,10 @@ namespace QuakeWaveGenerator
             int start_y = Convert.ToInt32(nudOffsetToFront.Value);
             int start_z = Convert.ToInt32(nudOffsetToTop.Value);
             int spacing = Convert.ToInt32(nudSpacing.Value);
+            int speed = Convert.ToInt32(nudSpeed.Value);
 
             return m_MapFileTool.ConcatBlockParts(
-                row, column, length, start_x, start_y, start_z, spacing, chkSound.Checked, cmbTextureName.SelectedItem.ToString(), amplitude, stepHeight);
+                row, column, length, start_x, start_y, start_z, spacing, chkSound.Checked, cmbTextureName.SelectedItem.ToString(), amplitude, stepHeight, speed);
         }
 
         private void SelectAllText(object sender, EventArgs e)

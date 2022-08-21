@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using QuakeWaveGenerator;
-using System;
 using System.Linq;
 
 namespace QuakeWaveGeneratorTest
@@ -42,47 +41,44 @@ namespace QuakeWaveGeneratorTest
         }
 
 
+        //[TestMethod, ExpectedException(typeof(ArgumentException))]
+        //public void GeneratePathCorner_CalledWithInvalidPathCornerTypeValue_ThrowsArgumentException()
+        //{
+        //    m_MapFileTool.GeneratePathCorner("", PathCornerType.None, 0, 0, 0);
+        //}
 
+        //[TestMethod]
+        //public void GeneratePathCorner_CalledWithPathCornerTypeInit_ReturnsExpectedResult()
+        //{
+        //    string result = m_MapFileTool.GeneratePathCorner("", PathCornerType.Init, 0, 0, 0);
+        //    Assert.IsTrue(result.Contains("_init"));
+        //    Assert.IsTrue(result.Contains("_bottom"));
+        //}
 
+        //[TestMethod]
+        //public void GeneratePathCorner_CalledWithPathCornerTypeBottom_ReturnsExpectedResult()
+        //{
+        //    const string basename = "MyBase";
+        //    string result = m_MapFileTool.GeneratePathCorner(basename, PathCornerType.Bottom, 0, 0, 0);
+        //    Assert.IsTrue(result.Contains("\"targetname\" \"" + basename + "_bottom\""));
+        //    Assert.IsTrue(result.Contains("\"target\" \"" + basename + "_top\""));
+        //}
 
-        [TestMethod, ExpectedException(typeof(ArgumentException))]
-        public void GeneratePathCorner_CalledWithInvalidPathCornerTypeValue_ThrowsArgumentException()
-        {
-            m_MapFileTool.GeneratePathCorner("", PathCornerType.None, 0, 0, 0);
-        }
+        //[TestMethod]
+        //public void GeneratePathCorner_CalledWithPathCornerTypeTop_ReturnsExpectedResult()
+        //{
+        //    const string basename = "MyBase";
+        //    string result = m_MapFileTool.GeneratePathCorner(basename, PathCornerType.Top, 0, 0, 0);
+        //    Assert.IsTrue(result.Contains("\"targetname\" \"" + basename + "_top\""));
+        //    Assert.IsTrue(result.Contains("\"target\" \"" + basename + "_bottom\""));
+        //}
 
-        [TestMethod]
-        public void GeneratePathCorner_CalledWithPathCornerTypeInit_ReturnsExpectedResult()
-        {
-            string result = m_MapFileTool.GeneratePathCorner("", PathCornerType.Init, 0, 0, 0);
-            Assert.IsTrue(result.Contains("_init"));
-            Assert.IsTrue(result.Contains("_bottom"));
-        }
-
-        [TestMethod]
-        public void GeneratePathCorner_CalledWithPathCornerTypeBottom_ReturnsExpectedResult()
-        {
-            const string basename = "MyBase";
-            string result = m_MapFileTool.GeneratePathCorner(basename, PathCornerType.Bottom, 0, 0, 0);
-            Assert.IsTrue(result.Contains("\"targetname\" \"" + basename + "_bottom\""));
-            Assert.IsTrue(result.Contains("\"target\" \"" + basename + "_top\""));
-        }
-
-        [TestMethod]
-        public void GeneratePathCorner_CalledWithPathCornerTypeTop_ReturnsExpectedResult()
-        {
-            const string basename = "MyBase";
-            string result = m_MapFileTool.GeneratePathCorner(basename, PathCornerType.Top, 0, 0, 0);
-            Assert.IsTrue(result.Contains("\"targetname\" \"" + basename + "_top\""));
-            Assert.IsTrue(result.Contains("\"target\" \"" + basename + "_bottom\""));
-        }
-
-        [TestMethod]
-        public void GeneratePathCorner_CalledWithCoordinates_ReturnsExpectedResult()
-        {
-            const string basename = "MyBase";
-            string result = m_MapFileTool.GeneratePathCorner(basename, PathCornerType.Top, 1, 2, 3);
-            Assert.IsTrue(result.Contains("\"origin\" \"1 2 3\""));
-        }
+        //[TestMethod]
+        //public void GeneratePathCorner_CalledWithCoordinates_ReturnsExpectedResult()
+        //{
+        //    const string basename = "MyBase";
+        //    string result = m_MapFileTool.GeneratePathCorner(basename, PathCornerType.Top, 1, 2, 3);
+        //    Assert.IsTrue(result.Contains("\"origin\" \"1 2 3\""));
+        //}
     }
 }

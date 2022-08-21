@@ -22,47 +22,6 @@ namespace QuakeWaveGenerator
         }
 
         /// <summary>
-        /// Generates a path_corner entity for various types (init, top, bottom) for the given coordinates.
-        /// </summary>
-        /// <param name="baseTargetName">The base target name to be used.</param>
-        /// <param name="pathCornerType">The type of the path_corner (i.e. how it is used - for init, as top or as bottom).</param>
-        /// <param name="x">The x coordinate.</param>
-        /// <param name="y">The y coordinate.</param>
-        /// <param name="z">The z coordinate.</param>
-        /// <returns>The code lines for the path_corner entity.</returns>
-        /// <exception cref="ArgumentException">Thrown when an invalid value for PathCornerType is passed.</exception>
-        public string GeneratePathCorner(string baseTargetName, PathCornerType pathCornerType, int x, int y, int z)
-        {
-            string addTypeString;
-            string addTargetNameString;
-            switch (pathCornerType)
-            {
-                case PathCornerType.Init:
-                    addTypeString = "_init";
-                    addTargetNameString = "_bottom";
-                    break;
-                case PathCornerType.Bottom:
-                    addTypeString = "_bottom";
-                    addTargetNameString = "_top";
-                    break;
-                case PathCornerType.Top:
-                    addTypeString = "_top";
-                    addTargetNameString = "_bottom";
-                    break;
-                default:
-                    throw new ArgumentException("Invalid value passed", "pathCornerType");
-            }
-
-            return string.Format(@"{{" + Environment.NewLine +
-                @"  ""classname"" ""path_corner""" + Environment.NewLine +
-                @"  ""targetname"" ""{0}""" + Environment.NewLine +
-                @"  ""target"" ""{1}""" + Environment.NewLine +
-                @"  ""origin"" ""{2} {3} {4}""" + Environment.NewLine +
-                @"}}" + Environment.NewLine,
-                baseTargetName + addTypeString, baseTargetName + addTargetNameString, x, y, z);
-        }
-
-        /// <summary>
         /// Generates the number of steps (in terms of height) that will be used for the wave 
         /// running through the func_path entities.
         /// </summary>
@@ -101,15 +60,19 @@ namespace QuakeWaveGenerator
         /// <param name="textureName"></param>
         /// <param name="amplitude"></param>
         /// <param name="stepHeight"></param>
+        /// <param name="speed"></param>
         /// <returns>The string for the map file.</returns>
-        public string ConcatBlockParts(int row, int column, int length, int start_x, int start_y, int start_z, int spacing, bool makeSound, string textureName, int amplitude, int stepHeight)
+        public string ConcatBlockParts(
+            int row, int column, int length,
+            int start_x, int start_y, int start_z,
+            int spacing, bool makeSound, string textureName, int amplitude, int stepHeight, int speed)
         {
             StringBuilder stringBuilder = new StringBuilder();
             string baseTargetName = GenerateBaseTargetName(row, column);
 
             func_train func_train =
                 new func_train(row, column, length, start_x, start_y, start_z,
-                    spacing, baseTargetName,makeSound, textureName);
+                    spacing, baseTargetName, makeSound, textureName, speed);
             stringBuilder.Append(func_train.ToString());
 
             CubeVerticesCalculator cubeVerticesCalculator =
