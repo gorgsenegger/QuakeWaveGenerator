@@ -6,7 +6,7 @@
 🔴**This is still work in progress**🔴
 
 ## Why...?
-Over the last couple of years I spent some time on and off with another Quake map, ["Fire, Water, Squish"](https://www.gorgs.org/2021/05/02/1700/), and played around quite a bit with `func_train` entities. As part of the experiments I did within the map, I came up with the idea of a grid of blocks in a map moving up and down in a "wave" like manner. After testing in a proof of concept map that it works I thought of a less time consuming and flexible way to set up all the necessary entities and their properties, in this is what I've come up with so far - "Quake Wave Generator". 
+Over the last couple of years I spent some time on and off with another Quake map, ["Fire, Water, Squish"](https://www.gorgs.org/2021/05/02/1700/), and played around quite a bit with `func_train` entities. As part of the experiments I did within the map, I came up with the idea of a grid of blocks in a map moving up and down in a "wave" like manner. After testing in a proof of concept map that it works, I thought of a less time consuming and flexible way to set up all the necessary entities and their properties. So this is what I've come up with so far - "Quake Wave Generator" (still thinking about a more appropriate name...).
 
 ## What this is
 A Winforms application to automate the creation of multiple `func_train` "blocks", laid out in a horizontal grid where you can configure the number of "rows" and "columns". The blocks only move vertically and, by timing the amplitudes of that movement, give the impression of a wave. 
